@@ -214,7 +214,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     level.addLevelingLevel(sender.id, 1, _level)
                     const userLevel = level.getLevelingLevel(sender.id, _level)
                     const fetchXp = 5 * Math.pow(userLevel, 2) + 50 * userLevel + 100
-                    await bocchi.reply(from, `*「 LEVEL UP 」*\n\n➸ *Nombre*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Nivel*: ${currentLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙 \n➸ *Rol*: *${role}*\n\nFelicidades!! 🎉🎉`, id)
+                    await bocchi.reply(from, `*ã LEVEL UP ã*\n\nâ¸ *Nombre*: ${pushname}\nâ¸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\nâ¸ *Nivel*: ${currentLevel} -> ${level.getLevelingLevel(sender.id, _level)} ð \nâ¸ *Rol*: *${role}*\n\nFelicidades!! ðð`, id)
                 }
             } catch (err) {
                 console.error(err)
@@ -478,7 +478,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                         } else if (resp[i].level >= 100) {
                             roles = 'EXTERMINADOR'
                         }
-                        leaderboard += `${i + 1}. wa.me/${_level[i].id.replace('@c.us', '')}\n➸ *XP*: ${_level[i].xp} *Nivel*: ${_level[i].level}\n➸ *Rol*: ${roles}\n\n`
+                        leaderboard += `${i + 1}. wa.me/${_level[i].id.replace('@c.us', '')}\nâ¸ *XP*: ${_level[i].xp} *Nivel*: ${_level[i].level}\nâ¸ *Rol*: ${roles}\n\n`
                     }
                     await bocchi.reply(from, leaderboard, id)
                 } catch (err) {
@@ -498,7 +498,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (pyre == '' || pyre == 'null' || pyre == null || pyre == undefined || pyre == 'undefined') {
             var playre = 'Indefinido'
         } else if (pyre.endsWith('years ago')) {
-            var playre = pyre.replace('years ago', 'A�os atras' )
+            var playre = pyre.replace('years ago', 'Años atras' )
         } else if (pyre.endsWith('hours ago')) {
             var playre = pyre.replace('hours ago', 'Horas atras')
         } else if (pyre.endsWith('minutes ago')) {
@@ -535,7 +535,7 @@ case 'ytmp4':
         if (vyre == '' || vyre == 'null' || vyre == null || vyre == undefined || vyre == 'undefined') {
             var videore = 'Indefinido'
         } else if (vyre.endsWith('years ago')) {
-            var videore = vyre.replace('years ago', 'A�os atras')
+            var videore = vyre.replace('years ago', 'Años atras')
         } else if (vyre.endsWith('hours ago')) {
             var videore = vyre.replace('hours ago', 'Horas atras')
         } else if (vyre.endsWith('minutes ago')) {
@@ -552,7 +552,7 @@ case 'ytmp4':
         console.log(fsize)
         const impo = size.data.filesize.replace('Download  ', 'un peso mucho mayor que no puedo calcular')
         if (fsize >= 16.0 || size.data.filesize.endsWith('Download  ') || size.data.filesize.endsWith('GB')) {
-            bocchi.reply(from, `Lo sentimos, para evitar prohibiciones de WhatsApp, el limite de envio de audio es de 16 MB, y esto tiene ${impo.replace('  Â  ', ' ')}.`, id)
+            bocchi.reply(from, `Lo sentimos, para evitar prohibiciones de WhatsApp, el limite de envio de audio es de 16 MB, y esto tiene ${impo.replace('  Ã  ', ' ')}.`, id)
         } else {
             await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${videore}\n\nVisualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto`, id)
             axios.get(`http://st4rz.herokuapp.com/api/ytv2?url=https://youtu.be/${res.data.result.result[0].id}`)
@@ -573,7 +573,7 @@ case 'ytmp4':
                         if (status !== 200) {
                             await bocchi.reply(from, 'Not found.', id)
                         } else {
-                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Publicado*: ${result[0].publisher}\n➸ *Version*: ${result[0].latest_version}\n➸ *Genero*: ${result[0].genre}\n\n*Link de descarga*\n${result[0].download}`, id)
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*ã MOD ENCONTRADO ã*\n\nâ¸ *APK*: ${result[0].title}\n\nâ¸ *Tamaño*: ${result[0].size}\nâ¸ *Publicado*: ${result[0].publisher}\nâ¸ *Version*: ${result[0].latest_version}\nâ¸ *Genero*: ${result[0].genre}\n\n*Link de descarga*\n${result[0].download}`, id)
                             console.log('Success sending APK mod!')
                         }
                     })
@@ -593,7 +593,7 @@ case 'ytmp4':
                         if (status !== 200) {
                             await bocchi.reply(from, 'Not found.', id)
                         } else {
-                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Root*: ${result[0].root}\n➸ *Version*: ${result[0].version}\n➸ *Precio*: ${result[0].price}\n\n*Link de descarga*\n${result[0].download}`, id)
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*ã MOD ENCONTRADO ã*\n\nâ¸ *APK*: ${result[0].title}\n\nâ¸ *Tamaño*: ${result[0].size}\nâ¸ *Root*: ${result[0].root}\nâ¸ *Version*: ${result[0].version}\nâ¸ *Precio*: ${result[0].price}\n\n*Link de descarga*\n${result[0].download}`, id)
                             console.log('Success sending APK mod!')
                         }
                     })
@@ -646,7 +646,7 @@ case 'ytmp4':
                 } else {
                     if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                     limit.addLimit(sender.id, _limit, isPremium, isOwner)
-                    await bocchi.reply(from, `*「 MATH 」*\n\n${q} = ${mathjs.evaluate(q)}`, id)
+                    await bocchi.reply(from, `*ã MATH ã*\n\n${q} = ${mathjs.evaluate(q)}`, id)
                 }
             break
             case 'aleatorio':
@@ -656,7 +656,7 @@ case 'ytmp4':
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.reply(from, 'Looking for a partner...', id)
                 await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
-                await bocchi.sendText(from, `Contacto encontrado: 🙉\n*${prefix}siguente* — para encontrar un nuevo contacto`)
+                await bocchi.sendText(from, `Contacto encontrado: ð\n*${prefix}siguente* â para encontrar un nuevo contacto`)
             break
             case 'siguiente':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
@@ -665,7 +665,7 @@ case 'ytmp4':
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.reply(from, 'Looking for a partner...', id)
                 await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
-                await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
+                await bocchi.sendText(from, `Partner found: ð\n*${prefix}next* â find a new partner`)
             case 'IP':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (args.length !== 1) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -674,7 +674,7 @@ case 'ytmp4':
                 await bocchi.reply(from, ind.wait(), id)
                 misc.whois(args[0])
                     .then(async ({ result }) => {
-                        await bocchi.reply(from, `*「 WHOIS 」*\n\n➸ *IP address*: ${result.ip_address}\n➸ *City*: ${result.city}\n➸ *Region*: ${result.region}\n➸ *Country*: ${result.country}\n➸ *ZIP code*: ${result.postal_code}\n➸ *Latitude and longitude*: ${result.latitude_longitude}\n➸ *Time zone*: ${result.time_zone}\n➸ *Call code*: ${result.calling_code}\n➸ *Currency*: ${result.currency}\n➸ *Language code*: ${result.languages}\n➸ *ASN*: ${result.asn}\n➸ *Organization*: ${result.org}`, id)
+                        await bocchi.reply(from, `*ã WHOIS ã*\n\nâ¸ *IP address*: ${result.ip_address}\nâ¸ *City*: ${result.city}\nâ¸ *Region*: ${result.region}\nâ¸ *Country*: ${result.country}\nâ¸ *ZIP code*: ${result.postal_code}\nâ¸ *Latitude and longitude*: ${result.latitude_longitude}\nâ¸ *Time zone*: ${result.time_zone}\nâ¸ *Call code*: ${result.calling_code}\nâ¸ *Currency*: ${result.currency}\nâ¸ *Language code*: ${result.languages}\nâ¸ *ASN*: ${result.asn}\nâ¸ *Organization*: ${result.org}`, id)
                     })
                     .catch(async (err) => {
                         console.error(err)
@@ -690,10 +690,10 @@ case 'ytmp4':
                 const messRemind = q.substring(q.lastIndexOf('|') + 2)
                 const parsedTime = ms(toMs(timeRemind))
                 reminder.addReminder(sender.id, messRemind, timeRemind, _reminder)
-                await bocchi.sendTextWithMentions(from, `*「 REMINDER 」*\n\nReminder diaktifkan! :3\n\n➸ *Pesan*: ${messRemind}\n➸ *Durasi*: ${parsedTime.hours} jam ${parsedTime.minutes} menit ${parsedTime.seconds} detik\n➸ *Untuk*: @${sender.id.replace('@c.us', '')}`, id)
+                await bocchi.sendTextWithMentions(from, `*ã REMINDER ã*\n\nReminder diaktifkan! :3\n\nâ¸ *Pesan*: ${messRemind}\nâ¸ *Durasi*: ${parsedTime.hours} jam ${parsedTime.minutes} menit ${parsedTime.seconds} detik\nâ¸ *Untuk*: @${sender.id.replace('@c.us', '')}`, id)
                 const intervRemind = setInterval(async () => {
                     if (Date.now() >= reminder.getReminderTime(sender.id, _reminder)) {
-                        await bocchi.sendTextWithMentions(from, `⏰ *「 REMINDER 」* ⏰\n\nAkhirnya tepat waktu~ @${sender.id.replace('@c.us', '')}\n\n➸ *Pesan*: ${reminder.getReminderMsg(sender.id, _reminder)}`)
+                        await bocchi.sendTextWithMentions(from, `â° *ã REMINDER ã* â°\n\nAkhirnya tepat waktu~ @${sender.id.replace('@c.us', '')}\n\nâ¸ *Pesan*: ${reminder.getReminderMsg(sender.id, _reminder)}`)
                         _reminder.splice(reminder.getReminderPosition(sender.id, _reminder), 1)
                         fs.writeFileSync('./database/user/reminder.json', JSON.stringify(_reminder))
                         clearInterval(intervRemind)
@@ -734,7 +734,7 @@ case 'ytmp4':
                 await bocchi.reply(from, ind.wait(), id)
                 misc.corona(q)
                     .then(async (res) => {
-                        await bocchi.sendText(from, '🌎️ Covid Info - ' + q.charAt(0).toUpperCase() + q.slice(1) + ' 🌍️\n\n✨️ Casos totales: ' + `${res.cases}` + '\n📆️ Casos de hoy: ' + `${res.todayCases}` + '\n☣️ Muertes totales: ' + `${res.deaths}` + '\n☢️ Muertes de hoy: ' + `${res.todayDeaths}` + '\n⛩️ Casos activos: ' + `${res.active}` + '.')
+                        await bocchi.sendText(from, 'ðï¸ Covid Info - ' + q.charAt(0).toUpperCase() + q.slice(1) + ' ðï¸\n\nâ¨ï¸ Casos totales: ' + `${res.cases}` + '\nðï¸ Casos de hoy: ' + `${res.todayCases}` + '\nâ£ï¸ Muertes totales: ' + `${res.deaths}` + '\nâ¢ï¸ Muertes de hoy: ' + `${res.todayDeaths}` + '\nâ©ï¸ Casos activos: ' + `${res.active}` + '.')
                         console.log('Success sending Result!')
                     })
                     .catch(async (err) => {
@@ -770,7 +770,7 @@ case 'ytmp4':
                     .then(async (results) => {
                         let txt = `-----[ *GOOGLE SEARCH* ]-----\n\n*by: rashidsiregar28*\n\n_*Search results for: ${q}*_`
                         for (let i = 0; i < results.length; i++) {
-                            txt += `\n\n➸ *Title*: ${results[i].title}\n➸ *Desc*: ${results[i].snippet}\n➸ *Link*: ${results[i].link}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
+                            txt += `\n\nâ¸ *Title*: ${results[i].title}\nâ¸ *Desc*: ${results[i].snippet}\nâ¸ *Link*: ${results[i].link}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
                         }
                         await bocchi.reply(from, txt, id)
                     })
@@ -844,7 +844,7 @@ case 'ytmp4':
                     return ' ' + pad(hrs) + ':' + pad(mins) + ':' + pad(secs)
                 }
                 const uptime = process.uptime()
-                await bocchi.reply(from, `── *「 BOT UPTIME 」* ──\n\n ❏${formater(uptime)}`, id)
+                await bocchi.reply(from, `ââ *ã BOT UPTIME ã* ââ\n\n â${formater(uptime)}`, id)
             break
             case 'ping':
             case 'p':
@@ -939,25 +939,25 @@ case 'ytmp4':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!isPremium) return await bocchi.reply(from, ind.notPremium(), id)
                 const cekExp = ms(premium.getPremiumExpired(sender.id, _premium) - Date.now())
-                await bocchi.reply(from, `*「 TIEMPO PREMIUM RESTANTE 」*\n\n➸ *ID*: ${sender.id}\n➸ *Premium sobrante*: ${cekExp.days} dias(s) ${cekExp.hours} horas(s) ${cekExp.minutes} minuto(s)`, id)
+                await bocchi.reply(from, `*ã TIEMPO PREMIUM RESTANTE ã*\n\nâ¸ *ID*: ${sender.id}\nâ¸ *Premium sobrante*: ${cekExp.days} dias(s) ${cekExp.hours} horas(s) ${cekExp.minutes} minuto(s)`, id)
             break
             case 'listapremium':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
-                let listPremi = '「 *LISTA DE USUARIOS PREMIUM* 」\n\n'
+                let listPremi = 'ã *LISTA DE USUARIOS PREMIUM* ã\n\n'
                 const deret = premium.getAllPremiumUser(_premium)
                 const arrayPremi = []
                 for (let i = 0; i < deret.length; i++) {
                     const checkExp = ms(premium.getPremiumExpired(deret[i], _premium) - Date.now())
                     arrayPremi.push(await bocchi.getContact(premium.getAllPremiumUser(_premium)[i]))
-                    listPremi += `${i + 1}. wa.me/${premium.getAllPremiumUser(_premium)[i].replace('@c.us', '')}\n➸ *Nombre*: ${arrayPremi[i].pushname}\n➸ *Expira*: ${checkExp.days} dia(s) ${checkExp.hours} hora(s) ${checkExp.minutes} minuto(s)\n\n`
+                    listPremi += `${i + 1}. wa.me/${premium.getAllPremiumUser(_premium)[i].replace('@c.us', '')}\nâ¸ *Nombre*: ${arrayPremi[i].pushname}\nâ¸ *Expira*: ${checkExp.days} dia(s) ${checkExp.hours} hora(s) ${checkExp.minutes} minuto(s)\n\n`
                 }
                 await bocchi.reply(from, listPremi, id)
             break
             case 'limite':
-                if (isPremium || isOwner) return await bocchi.reply(from, '⤞ Limite: ∞ (ILIMITADO)', id)
-                await bocchi.reply(from, `⤞ Limite: ${limit.getLimit(sender.id, _limit, limitCount)} / 25\n\n*_El l�mite se restablece en 00:00 HORAS_*`, id)
+                if (isPremium || isOwner) return await bocchi.reply(from, 'â¤ Limite: â (ILIMITADO)', id)
+                await bocchi.reply(from, `â¤ Limite: ${limit.getLimit(sender.id, _limit, limitCount)} / 25\n\n*_El límite se restablece en 00:00 HORAS_*`, id)
             break
             
             // ZONA OTAKU
@@ -1019,7 +1019,7 @@ case 'ytmp4':
                                 const { title, title_romaji, title_english, episode, similarity, filename, at, tokenthumb, anilist_id } = result.docs[0]
                                 let teks = ''
                                 if (similarity < 0.92) {
-                                    teks = 'Low similarity. 🤔\n\n'
+                                    teks = 'Low similarity. ð¤\n\n'
                                 } else {
                                     teks += `*Title*: ${title}\n*Romaji*: ${title_romaji}\n*English*: ${title_english}\n*Episode*: ${episode}\n*Similarity*: ${(similarity * 100).toFixed(1)}%`
                                     const video = `https://media.trace.moe/video/${anilist_id}/${encodeURIComponent(filename)}?t=${at}&token=${tokenthumb}`
@@ -1688,10 +1688,10 @@ case 'ytmp4':
                     console.log(`Searching nHentai for ${q}...`)
                     nana.search(q)
                         .then(async (g) => {
-                            let txt = `-----[ *NHENTAI* ]-----\n\n➸ *Result for*: ${q}`
+                            let txt = `-----[ *NHENTAI* ]-----\n\nâ¸ *Result for*: ${q}`
                             for (let i = 0; i < g.results.length; i++) {
                                 const { id, title, language } = g.results[i]
-                                txt += `\n\n➸ *Title*: ${title}\n➸ *Language*: ${language.charAt(0).toUpperCase() + language.slice(1)}\n➸ *Link*: nhentai.net/g/${id}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
+                                txt += `\n\nâ¸ *Title*: ${title}\nâ¸ *Language*: ${language.charAt(0).toUpperCase() + language.slice(1)}\nâ¸ *Link*: nhentai.net/g/${id}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
                             }
                             await bocchi.sendFileFromUrl(from, g.results[0].thumbnail.s, `${g.results[0].title}`, txt, id)
                                 .then(() => console.log('Success sending nHentai results!'))
@@ -1707,10 +1707,10 @@ case 'ytmp4':
                     console.log(`Searching nHentai for ${q}...`)
                     nana.search(q)
                         .then(async (g) => {
-                            let txt = `-----[ *NHENTAI* ]-----\n\n➸ *Result for*: ${q}`
+                            let txt = `-----[ *NHENTAI* ]-----\n\nâ¸ *Result for*: ${q}`
                             for (let i = 0; i < g.results.length; i++) {
                                 const { id, title, language } = g.results[i]
-                                txt += `\n\n➸ *Title*: ${title}\n➸ *Language*: ${language.charAt(0).toUpperCase() + language.slice(1)}\n➸ *Link*: nhentai.net/g/${id}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
+                                txt += `\n\nâ¸ *Title*: ${title}\nâ¸ *Language*: ${language.charAt(0).toUpperCase() + language.slice(1)}\nâ¸ *Link*: nhentai.net/g/${id}\n\n=_=_=_=_=_=_=_=_=_=_=_=_=`
                             }
                             await bocchi.sendFileFromUrl(from, g.results[0].thumbnail.s, `${g.results[0].title}`, txt, id)
                                 .then(() => console.log('Success sending nHentai results!'))
@@ -1733,7 +1733,7 @@ case 'ytmp4':
                     if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                     limit.addLimit(sender.id, _limit, isPremium, isOwner)
                     await bocchi.addParticipant(from, `${args[0]}@c.us`)
-                    await bocchi.sendText(from, '🎉 Welcome! 🎉')
+                    await bocchi.sendText(from, 'ð Welcome! ð')
                 } catch (err) {
                     console.error(err)
                     await bocchi.reply(from, 'Error!', id)
@@ -1783,7 +1783,7 @@ case 'ytmp4':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                 if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
-                await bocchi.sendText(from, 'Sayonara...u.u~ 👋')
+                await bocchi.sendText(from, 'Sayonara...u.u~ ð')
                 await bocchi.leaveGroup(groupId)
             break
             case 'todos':
@@ -1798,20 +1798,20 @@ case 'ytmp4':
                     const time = ms(cd - (Date.now() - lastEveryone))
                     await bocchi.reply(from, ind.daily(time), id)
                 } else if (isOwner) {
-                    let txt = '╔══✪〘 *TODOS* 〙✪══\n'
+                    let txt = 'ââââªã *TODOS* ãâªââ\n'
                         for (let i = 0; i < groupMem.length; i++) {
-                            txt += '╠➥'
+                            txt += 'â â¥'
                             txt += ` @${groupMem[i].id.replace(/@c.us/g, '')}\n`
                         }
-                    txt += '╚═〘 *W A I F U B O T* 〙'
+                    txt += 'ââã *W A I F U B O T* ã'
                     await bocchi.sendTextWithMentions(from, txt)
                 } else {
-                    let txt = '╔══✪〘 Mencionar a todos 〙✪══\n'
+                    let txt = 'ââââªã Mencionar a todos ãâªââ\n'
                         for (let i = 0; i < groupMem.length; i++) {
-                            txt += '╠➥'
+                            txt += 'â â¥'
                             txt += ` @${groupMem[i].id.replace(/@c.us/g, '')}\n`
                         }
-                    txt += '╚═〘 *W A I F U B O T* 〙'
+                    txt += 'ââã *W A I F U B O T* ã'
                     await bocchi.sendTextWithMentions(from, txt)
                     daily.addLimit(sender.id, _daily)
                 }
@@ -1978,20 +1978,20 @@ case 'ytmp4':
                     const time = ms(cd - (Date.now() - lastAdmin))
                     await bocchi.reply(from, ind.daily(time), id)
                 } else if (isOwner) {
-                    let txt = '╔══✪〘 *ADMINISTRADORES* 〙✪══\n'
+                    let txt = 'ââââªã *ADMINISTRADORES* ãâªââ\n'
                     for (let i = 0; i < groupAdm.length; i++) {
-                        txt += '╠➥'
+                        txt += 'â â¥'
                         txt += ` @${groupAdm[i].replace(/@c.us/g, '')}\n`
                     }
-                    txt += '╚═〘 *W A I F U B O T* 〙'
+                    txt += 'ââã *W A I F U B O T* ã'
                     await bocchi.sendTextWithMentions(from, txt)
                 } else {
-                    let txt = '╔══✪〘 *ADMINISTRADORES* 〙✪══\n'
+                    let txt = 'ââââªã *ADMINISTRADORES* ãâªââ\n'
                     for (let i = 0; i < groupAdm.length; i++) {
-                        txt += '╠➥'
+                        txt += 'â â¥'
                         txt += ` @${groupAdm[i].replace(/@c.us/g, '')}\n`
                     }
-                    txt += '╚═〘 *W A I F U B O T* 〙'
+                    txt += 'ââã *W A I F U B O T* ã'
                     await bocchi.sendTextWithMentions(from, txt)
                     daily.addLimit(sender.id, _daily)
                 }
@@ -2063,7 +2063,7 @@ case 'ytmp4':
 		await bocchi.reply(from, `wa.me/${sender.id.replace(/@c.us/g, '')}`, id)
 	        break
 
-            // COMANDOS DEL DUE�O 
+            // COMANDOS DEL DUEÑO 
             case 'transmision':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (!q) return await bocchi.reply(from, ind.emptyMess(), id)
@@ -2142,7 +2142,7 @@ case 'ytmp4':
             break
             case 'apagar':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                await bocchi.sendText(from, 'Otsukaresama deshita~ 👋')
+                await bocchi.sendText(from, 'Otsukaresama deshita~ ð')
                     .then(async () => await bocchi.kill())
                     .catch(() => new Error('Target closed.'))
             break
@@ -2153,11 +2153,11 @@ case 'ytmp4':
                         for (let prem of mentionedJidList) {
                             if (prem === botNumber) return await bocchi.reply(from, ind.wrongFormat(), id)
                             premium.addPremiumUser(prem, args[2], _premium)
-                            await bocchi.reply(from, `*「 PREMIUM ADDED 」*\n\n➸ *ID*: ${prem}\n➸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
+                            await bocchi.reply(from, `*ã PREMIUM ADDED ã*\n\nâ¸ *ID*: ${prem}\nâ¸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
                         }
                     } else {
                         premium.addPremiumUser(args[1] + '@c.us', args[2], _premium)
-                        await bocchi.reply(from, `*「 PREMIUM ADDED 」*\n\n➸ *ID*: ${args[1]}@c.us\n➸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
+                        await bocchi.reply(from, `*ã PREMIUM ADDED ã*\n\nâ¸ *ID*: ${args[1]}@c.us\nâ¸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
                     }
                 } else if (ar[0] === 'del') {
                     if (mentionedJidList.length !== 0) {
