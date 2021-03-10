@@ -42,14 +42,14 @@
 </h4>
 </div>
 
-# Requirements
+# Requerimientos 
 * [Node.js](https://nodejs.org/en/)
 * [Git](https://git-scm.com/downloads)
 * [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 * [libwebp](https://developers.google.com/speed/webp/download)
 * Cualquier editor de texto
 
-# Installation
+# Instalacion
 ## 📝 Clona este repositorio
 ```cmd
 > git clone https://github.com/SlavyanDesu/BocchiBot.git
