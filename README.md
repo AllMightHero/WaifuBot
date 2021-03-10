@@ -2,12 +2,11 @@
 <img src="https://images5.alphacoders.com/911/911614.png" alt="BocchiBot" width="500" />
 
 # _**BocchiBot**_
+>BocchiBot es un bot de WhatsApp multipropósito que usa wa-automate-nodejs library!
+>Traducido para toda latinoamericana al español, por Orumaito.
+>Adición de funciones y corrección de errores.
 
-> BocchiBot is a multipurpose WhatsApp bot using wa-automate-nodejs library!
->
->
-
-<h3 align="center">Made with ❤️ by</h3>
+<h3 align="center">Hecho con ❤️ por</h3>
 <p align="center">
   <a href="https://github.com/SlavyanDesu"><img src="https://avatars3.githubusercontent.com/u/28254882?s=400&u=25765902db0b709938966cf4127ac11af5eafb5d&v=4" height="128" width="128" /></a>
   <a href="https://github.com/AlvioAdjiJanuar"><img src="https://avatars2.githubusercontent.com/u/68207798?s=400&u=29439908cd661d11443391cb74f5b07267b71117&v=4" height="128" width="128" /></a>
@@ -48,17 +47,17 @@
 * [Git](https://git-scm.com/downloads)
 * [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 * [libwebp](https://developers.google.com/speed/webp/download)
-* Any text editor
+* Cualquier editor de texto
 
 # Installation
-## 📝 Cloning this repo
+## 📝 Clona este repositorio
 ```cmd
 > git clone https://github.com/SlavyanDesu/BocchiBot.git
 > cd BocchiBot
 ```
 
-## ✍️ Editing the file
-Edit the required value in `config.json`.
+## ✍️ Edita el archivo
+Edita los valores requeridos en `config.json`.
 ```json
 {
     "ownerBot": "62812xxxxxxxx@c.us", 
@@ -73,18 +72,18 @@ Edit the required value in `config.json`.
 }
 ```
 
-`ownerBot`: your WhatsApp number.  
-`prefix`: bot's prefix.  
-`uaOverride`: your user agent.  
-`itech`: I-Tech API key. You can get it [here](https://api.i-tech.id) by creating an account. After that, set your server/host static IP in [here](https://api.i-tech.id/settings/profile).  
-`nao`: SauceNAO API key. You can get it [here](https://saucenao.com/user.php) by creating an account.  
-`vhtear`: VHTear API key. You can get it [here](https://api.vhtear.com/) by purchasing his API key.  
-`melodic`: MelodicXT API key. You can use `administrator` key.   
-`tobz`: Tobz API key. You can use `BotWeA` key.   
-`lol`: LolHuman API key. You can get it [here](https://lolhuman.herokuapp.com/) by creating an account. 
+`ownerBot`: tu numero de Whatsapp.  
+`prefix`: prefijo a usar.  
+`uaOverride`: tu "user agent".  
+`itech`: I-Tech API key. Puedes conseguirlo [aqui](https://api.i-tech.id) creando una cuenta.  Después de eso, configure su IP/host estático en [here](https://api.i-tech.id/settings/profile).  
+`nao`: SauceNAO API key. Puedes conseguirlo [aqui](https://saucenao.com/user.php) creando una cuents.  
+`vhtear`: VHTear API key. Puedes conseguirlo [aqui](https://api.vhtear.com/) comprando su API key.  
+`melodic`: MelodicXT API key. Puedes usar`administrator` key.   
+`tobz`: Tobz API key. Puedes usar`BotWeA` key.   
+`lol`: LolHuman API key. Puedes conseguirlo [aqui](https://lolhuman.herokuapp.com/) creando una cuenta. 
 
-## 🗣️ Changing language
-If you want to change the language to English, replace all `ind` function to `eng`.   
+## 🗣️ Cambio de idioma
+`Si desea cambiar el idioma a inglés, reemplace todas las funciones `ind` por` eng`.   
 Example:
 ```js
 ind.wrongFormat()
@@ -94,43 +93,43 @@ To:
 eng.wrongFormat()
 ```
 
-## 🛠️ Installing the FFmpeg
-* Download one of the available versions of FFmpeg by clicking [this link](https://www.gyan.dev/ffmpeg/builds/).
-* Extract the file to `C:\` path.
-* Rename the extracted folder to `ffmpeg`.
-* Run Command Prompt as Administrator.
-* Run this command:
+## 🛠️ Instalando el FFmpeg
+* Descargue una de las versiones disponibles de FFmpeg haciendo clic en [este link](https://www.gyan.dev/ffmpeg/builds/).
+* Extrae el archivo en`C:\` path.
+* Cambie el nombre de la carpeta extraída a ffmpeg`.
+* Ejecute el símbolo del sistema como administrador.
+* Ejecute este comando:
 ```cmd
 > setx /m PATH "C:\ffmpeg\bin;%PATH%"
 ```
-It will give us a callback like `SUCCESS: specified value was saved`.
-* Now that you've FFmpeg installed, verify that it's working by running this command to see version number:
+Nos dará una devolución de llamada como `SUCCESS: se guardó el valor especificado`.
+*Ahora que tiene FFmpeg instalado, verifique que esté funcionando ejecutando este comando para ver el número de versión :
 ```cmd
 > ffmpeg -version
 ```
 
-## 📷 Installing the libwebp
-The installation is same as you install FFmpeg but whatever. I will make it clear.
-* Download the file according to the OS you are using by clicking [this link](https://developers.google.com/speed/webp/download).
-* Extract the file to `C:\` path.
-* Rename the extracted file to `libwebp`.
-* Run Command Prompt as Administrator.
-* Run this command:
+## 📷 Instalando el libwebp
+La instalación es la misma que instalar FFmpeg pero igual. Lo dejaré claro.
+* Descargue el archivo de acuerdo con el sistema operativo que está utilizando haciendo clic en [este link](https://developers.google.com/speed/webp/download).
+* Extrae el archivo en`C:\` path.
+* Cambie el nombre del archivo extraído a `libwebp`.
+* Ejecute el símbolo del sistema como administrador.
+* Ejecute este comando:
 ```cmd
 > setx /m PATH "C:\libwebp\bin;%PATH%"
 ```
-It will give us a callback like `SUCCESS: specified value was saved`.
-* Now that you've libwebp installed, verify that it's installed by running this command to see version number:
+Nos dará una devolución de llamada como `SUCCESS: se guardó el valor especificado`.
+* Ahora que tiene libwebp instalado, verifique que esté instalado ejecutando este comando para ver el número de versión:
 ```cmd
 > webpmux -version
 ```
 
-## 🔍 Installing the dependencies
+## 🔍 Instala las dependencias
 ```cmd
 > npm install
 ```
 
-## 🆗 Running the bot
+## 🆗 Ejecute el bot
 Regular node:
 ```cmd
 > npm start
@@ -142,13 +141,13 @@ PM2:
 > pm2 monit
 ```
 
-PM2 with cron job (restart after 5 hours):
+PM2 with cron job  (restart after 5 hours):
 ```cmd
 > pm2 start index.js --cron "* */5 * * *"
 > pm2 monit
 ```
 
-After that scan the QR code using your WhatsApp in your phone!
+Después de eso, escanee el código QR usando su WhatsApp en su teléfono!
 
 # Features
 If you want to unlock premium commands, please buy me a coffee at least 1 on Ko-fi platform.
