@@ -488,7 +488,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             break
 
             // DESCARGAS
-    break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
