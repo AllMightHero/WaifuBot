@@ -488,6 +488,66 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             break
 
             // DESCARGAS
+                       case 'm':
+    if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+    if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
+    axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
+    .then(async (res) => {
+        const pyre = res.data.result.result[0].publishedTime
+        if (pyre == '' || pyre == 'null' || pyre == null || pyre == undefined || pyre == 'undefined') {
+            var playre = 'Indefinido'
+        } else if (pyre.endsWith('years ago')) {
+            var playre = pyre.replace('years ago', 'Anios atras')
+        } else if (pyre.endsWith('hours ago')) {
+            var playre = pyre.replace('hours ago', 'Horas atras')
+        } else if (pyre.endsWith('minutes ago')) {
+            var playre = pyre.replace('minutes ago', 'Minutos atras')
+        } else if (pyre.endsWith('day ago')) {
+            var playre = pyre.replace('day ago', 'Dia atras')
+        } else if (pyre.endsWith('months ago')) {
+            var playre = pyre.replace('months ago', 'Meses atras')
+        } else if (pyre.endsWith('seconds ago')) {
+            var playre = pyre.replace('seconds ago', 'Segundos atras')
+        }
+        const asize = await axios.get(`http://st4rz.herokuapp.com/api/yta?url=http://youtu.be/${res.data.result.result[0].id}`)
+            await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${playre}\n\n Visualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto!`, id)
+            axios.get(`http://st4rz.herokuapp.com/api/yta2?url=http://youtu.be/${res.data.result.result[0].id}`)
+            .then(async(rest) => {
+                await bocchi.sendFileFromUrl(from, m3pa, '', '', id)
+                    })
+        }
+    })
+    break
+case 'v':
+    if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+    if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
+    axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
+    .then(async (res) => {
+        const vyre = res.data.result.result[0].publishedTime
+        if (vyre == '' || vyre == 'null' || vyre == null || vyre == undefined || vyre == 'undefined') {
+            var videore = 'Indefinido'
+        } else if (vyre.endsWith('years ago')) {
+            var videore = vyre.replace('years ago', 'Anios atrás')
+        } else if (vyre.endsWith('hours ago')) {
+            var videore = vyre.replace('hours ago', 'Horas atras')
+        } else if (vyre.endsWith('minutes ago')) {
+            var videore = vyre.replace('minutes ago', 'Minutos atras')
+        } else if (vyre.endsWith('day ago')) {
+            var videore = vyre.replace('day ago', 'Dia atras')
+        } else if (vyre.endsWith('months ago')) {
+            var videore = vyre.replace('months ago', 'Meses atras')
+        } else if (vyre.endsWith('seconds ago')) {
+            var videore = vyre.replace('seconds ago', 'Segundos atras')
+        }
+        const size = await axios.get(`http://st4rz.herokuapp.com/api/ytv?url=http://youtu.be/${res.data.result.result[0].id}}`)
+             await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${videore}\n\nVisualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto`, id)
+            axios.get(`http://st4rz.herokuapp.com/api/ytv2?url=https://youtu.be/${res.data.result.result[0].id}`)
+            .then(async(rest) => {
+                await bocchi.sendFileFromUrl(from, `${rest.data.result}`, ``, ``, id)
+                    })
+       
+    })
+    break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
