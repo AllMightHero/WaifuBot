@@ -321,13 +321,22 @@ Trate bien al bot, el propietario actuará con firmeza si el usuario viola las r
 exports.menuDownloader = () => {
     return `
 -----[ DESCARGA ]-----
+1. *{prefix}m*
+Reproduce canciones de YouTube
+Otros usos: -
+Uso: *{prefix}m* Nombre de la cancion. ( *NO USE CONTINUAMENTE* )
 
-1. *${prefix}moddroid*
+2. *{prefix}v*
+Reproduce videos de YouTube
+Otros usos: -
+Uso: *{prefix}v* Nombre del Video ( *NO USE CONTINUAMENTE* )
+
+3. *${prefix}moddroid*
 Buscar un mod en moddroid.
 Otros usos: -
 Uso: *${prefix}moddroid* nombre de APK. 
 
-2. *${prefix}happymod*
+4. *${prefix}happymod*
 Buscar un mod en happymod.
 Otros usos: -
 Uso: *${prefix}happymod* nombre de APK. 
