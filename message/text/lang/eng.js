@@ -199,11 +199,11 @@ exports.autoStikOn = () => {
 }
 
 exports.autoStikOff = () => {
-    return `¡La función de Auto-sticker se * habilito* con exito!`
+    return `¡La función de Auto-sticker se *deshabilito* con exito!`
 }
 
 exports.autoStikOnAlready = () => {
-    return `Auto-sticker feature has been enabled before.`
+    return `La funcion de Auto-sticker ya ha sido activada antes.`
 }
 
 exports.afkOn = (pushname, reason) => {
