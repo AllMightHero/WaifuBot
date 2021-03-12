@@ -267,7 +267,7 @@ exports.linkNsfw = () => {
 }
 
 exports.ageOld = () => {
-    return `¡Eres demasiado mayor para usar esta función!  Vuelva a su juventud para poder utilizar esta función.`
+    return `¡Eres demasiado mayor para usar esta función!  Vuelva a su juventud para poder utilizar esta funcion1.`
 }
 
 exports.fakeLink = () => {
@@ -278,7 +278,7 @@ exports.limit = () => {
     return `
 *── 「 LIMITE 」 ──*
 
-¡Se agotó el límite de uso! Por favor haz lo siguiente:
+¡Se agotó el limite de uso! Por favor haz lo siguiente:
 ❏ *_Espera hasta 12:00 AM (GMT+7)_*
     `
 }
@@ -321,15 +321,15 @@ Trate bien al bot, el propietario actuará con firmeza si el usuario viola las r
 exports.menuDownloader = () => {
     return `
 -----[ DESCARGA ]-----
-1. *{prefix}m*
+1. *${prefix}m*
 Reproduce canciones de YouTube
 Otros usos: -
-Uso: *{prefix}m* Nombre de la cancion. ( *NO USE CONTINUAMENTE* )
+Uso: *${prefix}m* Nombre de la cancion. ( *NO USE CONTINUAMENTE* )
 
-2. *{prefix}v*
+2. *${prefix}v*
 Reproduce videos de YouTube
 Otros usos: -
-Uso: *{prefix}v* Nombre del Video ( *NO USE CONTINUAMENTE* )
+Uso: *${prefix}v* Nombre del Video ( *NO USE CONTINUAMENTE* )
 
 3. *${prefix}moddroid*
 Buscar un mod en moddroid.
