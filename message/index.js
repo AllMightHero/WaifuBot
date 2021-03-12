@@ -25,6 +25,7 @@ const os = require('os')
 const nhentai = require('nhentai-js')
 const { API } = require('nhentai-api')
 const api = new API()
+const { removeBackgroundFromImageBase64 } = require('remove.bg')
 const sagiri = require('sagiri')
 const NanaAPI = require('nana-api')
 const nana = new NanaAPI()
@@ -86,7 +87,6 @@ const _afk = JSON.parse(fs.readFileSync('./database/user/afk.json'))
 const _reminder = JSON.parse(fs.readFileSync('./database/user/reminder.json'))
 const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
-const _warn = JSON.parse(fs.readFileSync('./database/warn.json'))
 let { memberLimit, groupLimit } = _setting
 /********** END OF DATABASES **********/
 
@@ -1108,7 +1108,7 @@ case 'v':
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *Le da un beso a* ' + arq[1])
             break
             
-            // Sticker
+            // STICKER 
                     case 'stiker':
             case 'sticker':
                 if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
@@ -1320,6 +1320,33 @@ case 'v':
                     await bocchi.reply(from, eng.wrongFormat(), id)
                 }
             break
+            case 'nobg':
+            case 'removebg':
+            case 'stickernobg':
+            case 'recorte':
+            if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+            if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+            if (!isOwner ) return await bocchi.reply(from, eng.notPremium(), id)
+                            if (isMedia && type === 'image') {
+                                try {
+                                    bocchi.reply(from, '?? Espere...', id)
+                                    var mediaData = await decryptMedia(message, uaOverride)
+                                    var imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
+                                    var base64img = imageBase64
+                                    var outFile = './media/img/noBg.png' //
+                                    var result = await removeBackgroundFromImageBase64({ base64img, apiKey: '52kbBgHxRt5USDQzAh8xKLeF ', size: 'auto', type: 'auto', outFile })
+                                    await fs.writeFile(outFile, result.base64img)
+                                    
+                                    await bocchi.sendImageAsSticker(from, `data:${mimetype};base64, ${result.base64img}, author: '@Orumaito ', pack: 'Creado por WaifuBot', keepScale:'true' `)
+                                    
+                                } catch (err) {
+                                    console.log(err)
+                                    bocchi.reply(from, 'Ocurrio una falla al procesar la imagen!', id)
+                                }
+                            } else {
+                                bocchi.reply(from, 'Envie una imagen con la etiqueta *-stickernobg*', id)
+                            }
+                            break
 
             // NSFW
             case 'lewds':
