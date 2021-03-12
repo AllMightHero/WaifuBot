@@ -808,7 +808,7 @@ case 'v':
                     if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
                     await bocchi.sendText(from, ind.menuLeveling())
                 } else {
-                    await bocchi.sendText(from, ind.menu(jumlahUser, levelMenu, xpMenu, role, pushname, reqXpMenu, isPremium ? 'YES' : 'NO'))
+                    await bocchi.sendFile(from, './menu.png', 'menu.png', ind.menu(jumlahUser, levelMenu, xpMenu, role, pushname, reqXpMenu, isPremium ? 'YES' : 'NO'), id)
                 }
             break
             case 'estado':
@@ -2081,7 +2081,6 @@ case 'v':
             case 'wame':
 		await bocchi.reply(from, `wa.me/${sender.id.replace(/@c.us/g, '')}`, id)
 	        break
-
             // COMANDOS DEL DUEÑO 
             case 'transmision':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
