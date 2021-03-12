@@ -86,6 +86,7 @@ const _afk = JSON.parse(fs.readFileSync('./database/user/afk.json'))
 const _reminder = JSON.parse(fs.readFileSync('./database/user/reminder.json'))
 const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
+const _warn = JSON.parse(fs.readFileSync('./database/warn.json'))
 let { memberLimit, groupLimit } = _setting
 /********** END OF DATABASES **********/
 
@@ -510,9 +511,13 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             var playre = pyre.replace('seconds ago', 'Segundos atras')
         }
         const asize = await axios.get(`http://st4rz.herokuapp.com/api/yta?url=http://youtu.be/${res.data.result.result[0].id}`)
+        const afsize = asize.data.filesize.replace(' MB', '')
+        console.log(afsize)
             await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${playre}\n\n Visualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto!`, id)
             axios.get(`http://st4rz.herokuapp.com/api/yta2?url=http://youtu.be/${res.data.result.result[0].id}`)
             .then(async(rest) => {
+                var m3pa = rest.data.result
+                var m3ti = rest.data.title
                 await bocchi.sendFileFromUrl(from, m3pa, '', '', id)
                     })
                     
