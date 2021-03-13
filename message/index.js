@@ -309,16 +309,25 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './hentai.mp3', id)
         }
+        
+           //Fix By Orumaito 
+        if (chats == 'Nya') {
+        if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+                bocchi.sendPtt(from, './nya.mp3', id)
+        }
+        
         // Fix By Orumaito 
         if (chats == 'Yamete') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './yamete.mp3', id)
         }
+        
          // Fix By Orumaito 
         if (chats == 'Baka') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './baka.mp3', id)
         }
+        
          // Fix By Orumaito 
         if (chats == 'Senpai') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
@@ -336,14 +345,19 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './onichan.mp3', id)
         }
-        
-        // Fix By Orumaito 
+      
+      // Fix By Orumaito 
         if (chats == 'Test') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './test.mp3', id)
         }
-        //
-
+        
+        // Fix By Orumaito 
+        if (chats == 'Sawarasenai') {
+        if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+                bocchi.sendPtt(from, './sawarasenai.mp3', id)
+        }
+       
         // Mute
         if (isCmd && isMute && !isGroupAdmins && !isOwner && !isPremium) return
         
@@ -602,7 +616,7 @@ case 'v':
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.sendText(from, q)
             break
-            case 'tts':
+            case 'audio':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
