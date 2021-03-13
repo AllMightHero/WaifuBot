@@ -437,10 +437,10 @@ El bot repetirá tu mensaje.
 Otros usos: -
 Uso: *${prefix}decir* texto. 
 
-2. *${prefix}tts*
+2. *${prefix}audio*
 Crea un texto a voz. Necesito un codigo de idioma, puede encontrarlo aqui https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 Otros usos: -
-Uso: *${prefix}tts* código de lenguaje | texto. 
+Uso: *${prefix}audio* código de lenguaje | texto. 
 
 3. *${prefix}afk*
 Configurare su cuenta en modo AFK, le dire quienes lo mencionaron.
@@ -600,16 +600,20 @@ Crea un comentario al estilo PornHub.
 Otros usos: -
 Uso: *${prefix}comentarioph* Nombre de usuario | texto. 
 
-6.- *${prefix}patear*
+6. *${prefix}patear*
 Dale una patada a alguien del grupo. 
 Otros usos. - 
-Uso:  *${prefix}patear* @persona.
+Uso:  *${prefix}patear* @miembro1
 
-7.- *${prefix}besar*
+7. *${prefix}besar*
 Date un beso con alguien del grupo 7u7. 
 Otros usos. - 
-Uso:  *${prefix}besar* @persona.
+Uso:  *${prefix}besar* @miembro1
 
+8. *${prefix}golpear*
+Golpea a alguien del grupo. 
+Otros usos. - 
+Uso:  *${prefix}golpear* @miembro1
 
 
 _Indice de menu [6]_
@@ -653,7 +657,7 @@ Uso: *${prefix}todos*
 7. *${prefix}cambiarfoto*
 Cambia la foto del tu grupo.
 Otros usos: -
-Uso: Envía imágenes con em comando *${prefix}cambiarfoto* o responde a imágenes con el comando *${prefix}cambiarfoto*.
+Uso: Envía imágenes con em comando *${prefix}cambiarfoto* o responde a imágenes con el comando *${prefix}cambiarfoto*
 
 8. *${prefix}antilink*
 Activa la función a ti-links de grupos. 
@@ -766,7 +770,7 @@ Uso: *${prefix}femdom*
 9. *${prefix}nhsearch*
 nHentai búsqueda.
 Otros usos: -
-Uso: *${prefix}nhsearch* Género
+Uso: *${prefix}nhsearch* Género. 
 
 _Indice de menu [8]_
     `
@@ -795,7 +799,7 @@ Uso: *${prefix}ss*
 4. *${prefix}ban*
 Agregué / elimine usuarios baneados. 
 Otros usos: -
-Uso: *${prefix}ban* add/del @user/62812xxxxxxxx
+Uso: *${prefix}ban* add/del @user/62812xxxxxxxx. 
 
 5. *${prefix}dejargrupos*
 Hágame salir de todos los grupos.
@@ -815,7 +819,7 @@ Uso: *${prefix}apagar*
 8. *${prefix}premium*
 Agregué / elimine usuarios premium.
 Otros usos: -
-Uso: *${prefix}premium* add/del @user
+Uso: *${prefix}premium* add/del @user. 
 
 9. *${prefix}infowa*
 Cambie mi info de Whatsapp.
@@ -832,36 +836,31 @@ Ajuste el nombre de paquete de los stickers.
 Otros usos: -
 Uso: *${prefix}ns* nombre del paquete  | nombre del autor
 
-12. *${prefix}mutear*
-Silencia a todos los usuarios.
-Otros usos: -
-Uso: *${prefix}mutear* activar/desctivar
-
-13. *${prefix}cambiarnombre*
+12. *${prefix}cambiarnombre*
 Cambia el nombre del bot.  Máximo 25 caracteres.
 Otros usos: -
 Uso: *${prefix}cambiarnombre* nuevo nombre.
 
-14. *${prefix}dar*
+13. *${prefix}dar*
 De experiencia a los usuarios.
 Otros usos: -
 Uso: *${prefix}dar* @usuario 1000XP
 
-15. *${prefix}listagrupos*
+14. *${prefix}listagrupos*
 Mire los grupos en los que estoy.
 Otros usos: -
 Uso: *${prefix}listagrupos*
 
-16. *${prefix}reset*
+15. *${prefix}reset*
 Me reiniciare.
 Otros usos: -
 Uso: *${prefix}reset*
 
-14. *Texto sin prefijo*
+16. *Texto sin prefijo*
 Mandare un audio 7u7
-Uso: Baka , Senpai , Onichan , Buenos dias, Test.
+Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, 
 
-15. *Musica Random*
+17. *Musica Random*
 Las favoritas de Orumaito
 Uso: Hentai, 
 
