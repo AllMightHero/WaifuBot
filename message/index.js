@@ -226,6 +226,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
         // Anti-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
+            if (chats.match(new RegExp(/(https:\/\/chat.whatsapp.com)/gi))) {
                 const valid = await bocchi.inviteInfo(chats)
                 if (valid) {
                     console.log(color('[KICK]', 'red'), color('Received a group link and it is a valid link!', 'yellow'))
@@ -235,11 +236,12 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     console.log(color('[WARN]', 'yellow'), color('Received a group link but is not a valid link!', 'yellow'))
                 }
             }
+        }
 
         // Simple anti virtext, sorted by chat length, by: VideFrelan
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
             if (chats.length > 5000) {
-                await bocchi.sendTextWithMentions(from, `Exceso de texto detectado @${sender.id} \nTendre que sacarte!`)
+                await bocchi.sendTextWithMentions(from, `Detectado @${sender.id} exceso de texto \nTendre que sacarte!`)
                 await bocchi.removeParticipant(groupId, sender.id)
              }
          }
@@ -600,7 +602,7 @@ case 'v':
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.sendText(from, q)
             break
-            case 'audio':
+            case 'tts':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1332,7 +1334,7 @@ case 'v':
             case 'recorte':
             if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
             if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
-            if (!isOwner ) return await bocchi.reply(from, eng.ownerOnly(), id)
+            if (!isOwner ) return await bocchi.reply(from, eng.notPremium(), id)
                             if (isMedia && type === 'image') {
                                 try {
                                     bocchi.reply(from, '?? Espere...', id)
