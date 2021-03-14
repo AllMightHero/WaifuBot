@@ -528,7 +528,7 @@ Texto a sticker.
 Otros usos: -
 Uso *${prefix}ttp* texto. 
 
-5. *${prefix}rename*
+5. *${prefix}renombrar*
 Cambia el nombre de paquete y autor de un Sticker.
 Otros usos: *cstick*
 Uso: Responda a un sticker con el comando *${prefix}rename* y el nuevo texto que desea agregar ej. *${prefix}rename* Orumaito | WaifuBot.
@@ -856,11 +856,15 @@ Me reiniciare.
 Otros usos: -
 Uso: *${prefix}reset*
 
-16. *Texto sin prefijo*
+16. *${prefix}ignorar*
+Ignorare todos los comandos del grupo.
+Uso: *${prefix}ignorar* si/no
+
+17. *Texto sin prefijo*
 Mandare un audio 7u7
 Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, 
 
-17. *Musica Random*
+18. *Musica Random*
 Las favoritas de Orumaito
 Uso: Hentai, 
 
@@ -893,7 +897,7 @@ exports.rules = () => {
 1. NO envíe spam al bot. 
  Penalización: *ADVERTENCIA / BLOQUEO TEMPORAL*
  
-2. NO LlAME al bot.
+2. NO LLAME/TEXTEE AL BOT
 Penalización: *BLOQUEO TEMPORAL*
 
 3. No abuse del bot.
