@@ -79,7 +79,6 @@ const _welcome = JSON.parse(fs.readFileSync('./database/group/welcome.json'))
 const _autosticker = JSON.parse(fs.readFileSync('./database/group/autosticker.json'))
 const _ban = JSON.parse(fs.readFileSync('./database/bot/banned.json'))
 const _premium = JSON.parse(fs.readFileSync('./database/bot/premium.json'))
-const _mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
 const _registered = JSON.parse(fs.readFileSync('./database/bot/registered.json'))
 const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 let _limit = JSON.parse(fs.readFileSync('./database/user/limit.json'))
@@ -88,13 +87,14 @@ const _reminder = JSON.parse(fs.readFileSync('./database/user/reminder.json'))
 const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
 let { memberLimit, groupLimit } = _setting
+const slce = JSON.parse(fs.readFileSync('./database/group/silence.json'))
 /********** END OF DATABASES **********/
 
 /********** MESSAGE HANDLER **********/
 // eslint-disable-next-line no-undef
 module.exports = msgHandler = async (bocchi = new Client(), message) => {
     try {
-        const { type, id, from, t, sender, isGroupMsg, chat, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList } = message
+        const { type, id, from, t, sender, isGroupMsg, chat, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList } = message
         let { body } = message
         const { name, formattedTitle } = chat
         let { pushname, verifiedName, formattedName } = sender
@@ -131,7 +131,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         const isLevelingOn = isGroupMsg ? _leveling.includes(groupId) : false
         const isAutoStickerOn = isGroupMsg ? _autosticker.includes(groupId) : false
         const isAntiNsfw = isGroupMsg ? _antinsfw.includes(groupId) : false
-        const isMute = isGroupMsg ? _mute.includes(chat.id) : false
         const isAfkOn = afk.checkAfkUser(sender.id, _afk)
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
         const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
@@ -358,9 +357,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 bocchi.sendPtt(from, './sawarasenai.mp3', id)
         }
        
-        // Mute
-        if (isCmd && isMute && !isGroupAdmins && !isOwner && !isPremium) return
-        
+       
         // Ignore banned and blocked users
         if (isCmd && (isBanned || isBlocked) && !isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
         if (isCmd && (isBanned || isBlocked) && isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
@@ -404,6 +401,9 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     console.log(color('[REGISTER]'), color(time, 'yellow'), 'Name:', color(namaUser, 'cyan'), 'Age:', color(umurUser, 'cyan'), 'Serial:', color(serialUser, 'cyan'))
                 }
             break
+            
+            //IGNORAR
+            if (isGroupMsg && isCmd && !isOwner && !isGroupAdmins && mute) return console.log(color('[SILENCE]', 'red'), color(`Ignorando comando de ${name} pois ele est� mutado...`, 'yellow'))
 
             // Nivel [BETA] por Slavyan
             case 'nivel':
@@ -671,7 +671,7 @@ case 'v':
                 await bocchi.reply(from, 'Looking for a partner...', id)
                 await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
                 await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
-            case 'IP':
+            case 'ip':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (args.length !== 1) return await bocchi.reply(from, ind.wrongFormat(), id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
@@ -1231,7 +1231,7 @@ case 'v':
                     })
             break
                     case 'cstick':  // By: Orumaito  
-	                case 'rename':   
+	                case 'renombrar':   
                     if (args.length == 0) return bocchi.reply(from, `Para cambiarle el nombre de paquete y de autor a un sticker mencionalo junto al comando:\n\n*${prefix}cstick (nombre del paquete) | (autor)*\n\n_Es obligatorio que uses esta rata *" | "* para dividir cada texto......_\n\nejemplo: *${prefix}cstick (WaifuBot) | (@Orumaito)*\n\n*Intenta usar letras y n?meros originales... para que no hayan problema con el cambio de nombres.*`, id)
                     if (!q.includes('|')) return await bocchi.reply(from, eng.wrongFormat(), id)
                     if (quotedMsg && quotedMsg.type == 'sticker') {
@@ -2243,23 +2243,6 @@ case 'v':
                 exif.create(namaPack, authorPack)
                 await bocchi.reply(from, ind.doneOwner(), id)
             break
-            case 'mutear':
-                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(pushname), id)
-                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
-                if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
-                if (ar[0] === 'activar') {
-                    if (isMute) return await bocchi.reply(from, ind.muteChatOnAlready(), id)
-                    _mute.push(groupId)
-                    fs.writeFileSync('./database/bot/mute.json', JSON.stringify(_mute))
-                    await bocchi.reply(from, ind.muteChatOn(), id)
-                } else if (ar[0] === 'desactivar') {
-                    _mute.splice(groupId, 1)
-                    fs.writeFileSync('./database/bot/mute.json', JSON.stringify(_mute))
-                    await bocchi.reply(from, ind.muteChatOff(), id)
-                } else {
-                    await bocchi.reply(from, ind.wrongFormat(), id)
-                }
-            break
             case 'cambiarnombre':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (!q || q.length > 25) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -2288,6 +2271,23 @@ case 'v':
                     }
                     bocchi.reply(from, gc, id)
                 })
+            break
+            case 'ignorar':
+			if (isGroupMsg && isGroupAdmins || isGroupMsg && isOwner) {
+				if (args.length !== 1) return bocchi.reply(from, 'Opciones: on / off', id)
+				if (args[0] == 'si') {
+					slce.push(chat.id)
+					fs.writeFileSync('./database/group/silence.json', JSON.stringify(slce))
+					bocchi.reply(from, 'Grupo desactivado.', id)
+				} else if (args[0] == 'no') {
+					let ince = slce.indexOf(chatId)
+					slce.splice(ince, 1)
+					fs.writeFileSync('./database/group//silence.json', JSON.stringify(slce))
+					bocchi.reply(from, 'Grupo activado.', id)
+				}
+            } else {
+                bocchi.reply(from, 'Ocurre un Error!', id)
+            }
             break
             case 'reset':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
