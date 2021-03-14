@@ -87,14 +87,13 @@ const _reminder = JSON.parse(fs.readFileSync('./database/user/reminder.json'))
 const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
 let { memberLimit, groupLimit } = _setting
-const slce = JSON.parse(fs.readFileSync('./database/group/silence.json'))
 /********** END OF DATABASES **********/
 
 /********** MESSAGE HANDLER **********/
 // eslint-disable-next-line no-undef
 module.exports = msgHandler = async (bocchi = new Client(), message) => {
     try {
-        const { type, id, from, t, sender, isGroupMsg, chat, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList } = message
+        const { type, id, from, t, sender, isGroupMsg, chat, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList } = message
         let { body } = message
         const { name, formattedTitle } = chat
         let { pushname, verifiedName, formattedName } = sender
@@ -401,9 +400,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     console.log(color('[REGISTER]'), color(time, 'yellow'), 'Name:', color(namaUser, 'cyan'), 'Age:', color(umurUser, 'cyan'), 'Serial:', color(serialUser, 'cyan'))
                 }
             break
-            
-            //IGNORAR
-            if (isGroupMsg && isCmd && !isOwner && !isGroupAdmins && mute) return console.log(color('[SILENCE]', 'red'), color(`Ignorando comando de ${name} pois ele está mutado...`, 'yellow'))
 
             // Nivel [BETA] por Slavyan
             case 'nivel':
@@ -2271,23 +2267,6 @@ case 'v':
                     }
                     bocchi.reply(from, gc, id)
                 })
-            break
-            case 'ignorar':
-			if (isGroupMsg && isGroupAdmins || isGroupMsg && isOwner) {
-				if (args.length !== 1) return bocchi.reply(from, 'Opciones: on / off', id)
-				if (args[0] == 'si') {
-					slce.push(chat.id)
-					fs.writeFileSync('./database/group/silence.json', JSON.stringify(slce))
-					bocchi.reply(from, 'Grupo desactivado.', id)
-				} else if (args[0] == 'no') {
-					let ince = slce.indexOf(chatId)
-					slce.splice(ince, 1)
-					fs.writeFileSync('./database/group//silence.json', JSON.stringify(slce))
-					bocchi.reply(from, 'Grupo activado.', id)
-				}
-            } else {
-                bocchi.reply(from, 'Ocurre un Error!', id)
-            }
             break
             case 'reset':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
