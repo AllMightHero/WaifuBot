@@ -1762,7 +1762,7 @@ case 'v':
                 }
             break
             
-            // COMANDOS DE MODERACION
+            // COMANDOS DE GRUPOS
             case 'agregar':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
@@ -2114,7 +2114,7 @@ case 'v':
                 }
                 await bocchi.reply(from, ind.doneOwner(), id)
             break
-            case 'limpiartodo':
+            case 'limpiarchats':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 const allChats = await bocchi.getAllChats()
                 for (let delChats of allChats) {
@@ -2243,7 +2243,7 @@ case 'v':
                 exif.create(namaPack, authorPack)
                 await bocchi.reply(from, ind.doneOwner(), id)
             break
-            case 'cambiarnombre':
+            case 'nuevonombre':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (!q || q.length > 25) return await bocchi.reply(from, ind.wrongFormat(), id)
                 await bocchi.setMyName(q)
