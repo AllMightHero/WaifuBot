@@ -622,7 +622,7 @@ _Indice de menu [6]_
 
 exports.menuModeration = () => {
     return `
------[ MODERACION ]-----
+-----[ GRUPOS ]-----
 
 1. *${prefix}agregar*
 Agrega usuarios a tu grupo.
@@ -786,10 +786,10 @@ Haz una transmisión.
 Otros usos: -
 Uso: *${prefix}transmision* texto. 
 
-2. *${prefix}limpiartodo*
+2. *${prefix}limpiarchats*
 Elimina todos los chats de la cuenta del bot.
 Otros usos: -
-Uso: *${prefix}limpiartodo*
+Uso: *${prefix}limpiarchats*
 
 3. *${prefix}ss*
 Tomó una captura de pantalla de la sesión desde la cuenta del bot.
@@ -836,10 +836,10 @@ Ajuste el nombre de paquete de los stickers.
 Otros usos: -
 Uso: *${prefix}ns* nombre del paquete  | nombre del autor
 
-12. *${prefix}cambiarnombre*
+12. *${prefix}nuevonombre*
 Cambia el nombre del bot.  Máximo 25 caracteres.
 Otros usos: -
-Uso: *${prefix}cambiarnombre* nuevo nombre.
+Uso: *${prefix}nuevonombre* texto.
 
 13. *${prefix}dar*
 De experiencia a los usuarios.
@@ -909,7 +909,7 @@ Penalización: *BLOQUEO PERMANENTE*
 Si comprende estas reglas, escriba *${prefix}menu* para empezar.
 
 Dueño:
-wa.me/+525518064309
+wa.me/+525518064309 (Orumaito)
 
 Código fuente de:
 wa.me/+6281294958473 (Slavyan)
@@ -926,16 +926,16 @@ El propietario / hoster de este bot es independiente de la responsabilidad y sup
 El propietario / hoster puede plagiar, agregar, eliminar, reemplazar el código fuente con notas *NO VENDER* este código fuente en ninguna forma.
 Si ocurre un error, la primera persona con la que debe comunicarse es el propietario / hoster.
  
-Si quieres contribuir a este proyecto, visita:
-https://github.com/SlavyanDesu/BocchiBot
+Si quieres contribuir a este proyecto, vista:
+https://github.com/AllMightHero/WaifuBot
 
 Personas de contacto:
 
 Dueño:
-wa.me/+525518064309
+wa.me/+525518064309 (Orumaito)
 
 (Desarrollador) 
-wa.me/+6281294958473
+wa.me/+6281294958473 (Slavyan)
 
 Gracias!
 
