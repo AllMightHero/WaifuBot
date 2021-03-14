@@ -54,8 +54,10 @@
 # Instalacion
 ## 📝 Clona este repositorio
 ```cmd
-> git clone https://github.com/SlavyanDesu/BocchiBot.git
+> git clone https://github.com/AllMightHero/WaifuBot
 > cd BocchiBot
+> npm install remove.bg
+> apt-get install ffmpeg
 ```
 
 ## ✍️ Edita el archivo
