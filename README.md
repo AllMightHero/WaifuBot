@@ -55,9 +55,7 @@
 ## 📝 Clona este repositorio
 ```cmd
 > git clone https://github.com/AllMightHero/WaifuBot
-> cd BocchiBot
-> npm install remove.bg
-> apt-get install ffmpeg
+> cd WaifuBot
 ```
 
 ## ✍️ Edita el archivo
@@ -131,6 +129,8 @@ Nos dará una devolución de llamada como `SUCCESS: se guardó el valor especifi
 ## 🔍 Instala las dependencias
 ```cmd
 > npm install
+> npm install remove.bg
+> apt-get install ffmpeg
 ```
 
 ## 🆗 Ejecute el bot
