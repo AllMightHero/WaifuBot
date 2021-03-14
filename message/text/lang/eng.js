@@ -856,15 +856,11 @@ Me reiniciare.
 Otros usos: -
 Uso: *${prefix}reset*
 
-16. *${prefix}ignorar*
-Ignorare todos los comandos del grupo.
-Uso: *${prefix}ignorar* si/no
-
-17. *Texto sin prefijo*
+16. *Texto sin prefijo*
 Mandare un audio 7u7
 Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, 
 
-18. *Musica Random*
+17. *Musica Random*
 Las favoritas de Orumaito
 Uso: Hentai, 
 
