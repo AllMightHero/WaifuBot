@@ -499,7 +499,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             break
 
             // DESCARGAS
-                       case 'm':
+                       case 'musica':
     if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
     if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
     axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
@@ -533,7 +533,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     
     })
     break
-case 'v':
+case 'video':
     if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
     if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
     axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
@@ -691,7 +691,7 @@ case 'v':
                 const messRemind = q.substring(q.lastIndexOf('|') + 2)
                 const parsedTime = ms(toMs(timeRemind))
                 reminder.addReminder(sender.id, messRemind, timeRemind, _reminder)
-                await bocchi.sendTextWithMentions(from, `*「 RECORDATORIO 」*\n\nRecordatorio activado! :3\n\n➸ *Mensaje*: ${messRemind}\n➸ *Duracion*: ${parsedTime.hours} jam ${parsedTime.minutes} menit ${parsedTime.seconds} detik\n➸ *A*: @${sender.id.replace('@c.us', '')}`, id)
+                await bocchi.sendTextWithMentions(from, `*「 RECORDATORIO 」*\n\nRecordatorio activado! :3\n\n➸ *Mensaje*: ${messRemind}\n➸ *Duracion*: ${parsedTime.hours} Horas ${parsedTime.minutes} Minutos ${parsedTime.seconds} Segundos\n➸ *A*: @${sender.id.replace('@c.us', '')}`, id)
                 const intervRemind = setInterval(async () => {
                     if (Date.now() >= reminder.getReminderTime(sender.id, _reminder)) {
                         await bocchi.sendTextWithMentions(from, `⏰ *「 RECORDATORIO 」* ⏰\n\nFinalmente a tiempo~ @${sender.id.replace('@c.us', '')}\n\n➸ *Mensaje*: ${reminder.getReminderMsg(sender.id, _reminder)}`)
