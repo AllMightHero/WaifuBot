@@ -155,6 +155,14 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             scheduled: true,
             timezone: 'Asia/Jakarta'
         })
+       
+        // Simple anti virtext, sorted by chat length, by: VideFrelan
+        if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
+            if (chats.length > 5000) {
+                await bocchi.sendTextWithMentions(from, `Detectado @${sender.id} exceso de texto \nTendre que sacarte!`)
+                await bocchi.removeParticipant(groupId, sender.id)
+             }
+         }
 
         // ROLE (Change to what you want, or add) and you can change the role sort based on XP.
         const levelRole = level.getLevelingLevel(sender.id, _level)
@@ -220,8 +228,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             }
         }
 
-
-
         // Anti-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
             if (chats.match(new RegExp(/(https:\/\/chat.whatsapp.com)/gi))) {
@@ -236,13 +242,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             }
         }
 
-        // Simple anti virtext, sorted by chat length, by: VideFrelan
-        if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
-            if (chats.length > 5000) {
-                await bocchi.sendTextWithMentions(from, `Detectado @${sender.id} exceso de texto \nTendre que sacarte!`)
-                await bocchi.removeParticipant(groupId, sender.id)
-             }
-         }
         // Anti-fake-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
             if (chats.match(new RegExp(/(https:\/\/chat.(?!whatsapp.com))/gi))) {
@@ -1338,6 +1337,19 @@ case 'v':
                     await bocchi.reply(from, eng.wrongFormat(), id)
                 }
             break
+            case 'gay':
+                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (isMedia && type === 'image' || isQuotedImage) {
+                    const encryptMediaWt5 = isQuotedImage ? quotedMsg : message
+                    const dataPotoWt5 = await decryptMedia(encryptMediaWt5, uaOverride)
+                    const fotoWtNya5 = await uploadImages(dataPotoWt5, `fotoProfilWt5.${sender.id}`)
+                    await bocchi.reply(from, eng.wait(), id)
+                    await bocchi.sendFileFromUrl(from, `https://some-random-api.ml/canvas/gay?avatar=${fotoWtNya5}`, 'Wasted.jpg', 'El sticker esta siendo enviado', id).then(() => bocchi.sendStickerfromUrl(from, `https://some-random-api.ml/canvas/gay?avatar=${fotoWtNya5}`))
+                    console.log('Success sending Wasted image!')
+                } else {
+                    await bocchi.reply(from, eng.wrongFormat(), id)
+                }
+                break
             case 'nobg':
             case 'removebg':
             case 'stickernobg':
