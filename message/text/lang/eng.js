@@ -329,7 +329,7 @@ Uso: *${prefix}musica* *Artista+Cancion*
 2. *${prefix}video* ( *NO USE CONTINUAMENTE* )
 Reproduce videos de YouTube
 Otros usos: -
-Uso: *${prefix}v* *Artista+Cancion*
+Uso: *${prefix}video* *Artista+Cancion*
 
 3. *${prefix}moddroid*
 Buscar un mod en moddroid.
