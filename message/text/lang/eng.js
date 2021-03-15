@@ -305,7 +305,7 @@ Los siguientes menus están disponibles:
 ➸ *[4]* Sticker
 ➸ *[5]* Otaku 
 ➸ *[6]* Diversión 
-➸ *[7]* Moderacion
+➸ *[7]* Grupos
 ➸ *[8]* NSFW
 ➸ *[9]* Dueño
 ➸ *[10]* Nivel
@@ -548,6 +548,15 @@ Crea una imagen y sticker con un filtro rojo .
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}rojo* o responde a una imagen con el comando *${prefix}rojo*.
 
+9. *${prefix}gay*
+Crea una imagen y sticker con los colores de la bandera gay. 
+Otros usos: -
+Uso: Envía una imagen con el comando *${prefix}gay* o responde a una imagen con el comando *${prefix}gay*.
+
+10. *{prefix}nobg*
+Crea Stickers sin fondo (exclusivo para el propietario). 
+Otros usos: *recorte*
+Uso: Envie una imagen con el comando *${prefix}nobg*
 
 _Indice de menu [4]_
     `
