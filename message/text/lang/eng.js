@@ -321,15 +321,15 @@ Trate bien al bot, el propietario actuará con firmeza si el usuario viola las r
 exports.menuDownloader = () => {
     return `
 -----[ DESCARGA ]-----
-1. *${prefix}m*
+1. *${prefix}musica* ( *NO USE CONTINUAMENTE* )
 Reproduce canciones de YouTube
 Otros usos: -
-Uso: *${prefix}m* Nombre de la cancion. ( *NO USE CONTINUAMENTE* )
+Uso: *${prefix}musica* *Artista+Cancion*
 
-2. *${prefix}v*
+2. *${prefix}video* ( *NO USE CONTINUAMENTE* )
 Reproduce videos de YouTube
 Otros usos: -
-Uso: *${prefix}v* Nombre del Video ( *NO USE CONTINUAMENTE* )
+Uso: *${prefix}v* *Artista+Cancion*
 
 3. *${prefix}moddroid*
 Buscar un mod en moddroid.
