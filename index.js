@@ -101,7 +101,7 @@ const start = (bocchi = new Client()) => {
                     .setBackground('https://www.photohdx.com/images/2016/05/red-blurry-background.jpg')
                     .toAttachment()
                 const base64 = `data:image/png;base64,${welcomer.toBuffer().toString('base64')}`
-                await bocchi.sendFile(event.chat, base64, 'welcome.png', `Bienvenido! ${pushname}! •Soy Waifubot, un bot de respuestas automaticas el cual te ayudara con diferentes opciones\n\n😎 Disfruta tu estancia en el grupo\n\n😇 No olvides registrate en mi sistema para usar mis comandos usando:\n\n☺️ *-registrar* nombre  edad\n\n🤓 Ejemplo: *-registrar* Alex  20\n\n🤔 Si tienes dudas pregunta a los administradores del grupo\n\n🥺 *NO me mandes privado*`)
+                await bocchi.sendFile(event.chat, base64, 'welcome.png', `Bienvenido! ${pushname}! •Soy Waifubot, un bot de respuestas automaticas el cual te ayudara con diferentes opciones\n\n• Disfruta tu estancia en el grupo\n\n• No olvides registrate en mi sistema para usar mis comandos usando:\n\n• *-registrar* nombre  edad\n\n• Ejemplo: *-registrar* Alex  20\n\n• Si tienes dudas pregunta a los administradores del grupo\n\n• *NO me mandes privado*`)
             } else if (event.action === 'remove' && event.who !== botNumbers && isWelcome) {
                 const pic = await bocchi.getProfilePicFromServer(event.who)
                 if (pic === undefined) {
