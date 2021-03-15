@@ -304,55 +304,55 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             // Fix By Orumaito 
         if (chats == 'Hentai') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './hentai.mp3', id)
+                bocchi.sendPtt(from, './audios/hentai.mp3', id)
         }
         
            //Fix By Orumaito 
         if (chats == 'Nya') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './nya.mp3', id)
+                bocchi.sendPtt(from, './audios/nya.mp3', id)
         }
         
         // Fix By Orumaito 
         if (chats == 'Yamete') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './yamete.mp3', id)
+                bocchi.sendPtt(from, './audios/yamete.mp3', id)
         }
         
          // Fix By Orumaito 
         if (chats == 'Baka') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './baka.mp3', id)
+                bocchi.sendPtt(from, './audios/baka.mp3', id)
         }
         
          // Fix By Orumaito 
         if (chats == 'Senpai') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './senpai.mp3', id)
+                bocchi.sendPtt(from, './audios/senpai.mp3', id)
         }
         
            // Fix By Orumaito 
         if (chats == 'Buenos dias') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './buenos dias.mp3', id)
+                bocchi.sendPtt(from, './audios/buenos dias.mp3', id)
         }
         
         // Fix By Orumaito 
         if (chats == 'Onichan') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './onichan.mp3', id)
+                bocchi.sendPtt(from, './audios/onichan.mp3', id)
         }
       
       // Fix By Orumaito 
         if (chats == 'Test') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './test.mp3', id)
+                bocchi.sendPtt(from, './audios/test.mp3', id)
         }
         
         // Fix By Orumaito 
         if (chats == 'Sawarasenai') {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                bocchi.sendPtt(from, './sawarasenai.mp3', id)
+                bocchi.sendPtt(from, './audios/sawarasenai.mp3', id)
         }
        
        
@@ -438,6 +438,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     })
             break
             case 'listadenivel':
+            case 'top':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!isLevelingOn) return await bocchi.reply(from, ind.levelingNotOn(), id)
                 if (!isGroupMsg) return await bocchi.reply(from. ind.groupOnly(), id)
@@ -690,10 +691,10 @@ case 'v':
                 const messRemind = q.substring(q.lastIndexOf('|') + 2)
                 const parsedTime = ms(toMs(timeRemind))
                 reminder.addReminder(sender.id, messRemind, timeRemind, _reminder)
-                await bocchi.sendTextWithMentions(from, `*「 REMINDER 」*\n\nReminder diaktifkan! :3\n\n➸ *Pesan*: ${messRemind}\n➸ *Durasi*: ${parsedTime.hours} jam ${parsedTime.minutes} menit ${parsedTime.seconds} detik\n➸ *Untuk*: @${sender.id.replace('@c.us', '')}`, id)
+                await bocchi.sendTextWithMentions(from, `*「 RECORDATORIO 」*\n\nRecordatorio activado! :3\n\n➸ *Mensaje*: ${messRemind}\n➸ *Duracion*: ${parsedTime.hours} jam ${parsedTime.minutes} menit ${parsedTime.seconds} detik\n➸ *A*: @${sender.id.replace('@c.us', '')}`, id)
                 const intervRemind = setInterval(async () => {
                     if (Date.now() >= reminder.getReminderTime(sender.id, _reminder)) {
-                        await bocchi.sendTextWithMentions(from, `⏰ *「 REMINDER 」* ⏰\n\nAkhirnya tepat waktu~ @${sender.id.replace('@c.us', '')}\n\n➸ *Pesan*: ${reminder.getReminderMsg(sender.id, _reminder)}`)
+                        await bocchi.sendTextWithMentions(from, `⏰ *「 RECORDATORIO 」* ⏰\n\nFinalmente a tiempo~ @${sender.id.replace('@c.us', '')}\n\n➸ *Mensaje*: ${reminder.getReminderMsg(sender.id, _reminder)}`)
                         _reminder.splice(reminder.getReminderPosition(sender.id, _reminder), 1)
                         fs.writeFileSync('./database/user/reminder.json', JSON.stringify(_reminder))
                         clearInterval(intervRemind)
@@ -1121,7 +1122,7 @@ case 'v':
             arq = body.trim().split(' ')
             const person5 = pushname.replace('@c.us', '')
             await bocchi.sendStickerfromUrl(from, 'https://raw.githubusercontent.com/AllMightHero/Acciones/main/golpe.gif')
-            bocchi.sendPtt(from, './smash.mp3', id)
+            bocchi.sendPtt(from, './audios/smash.mp3', id)
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *golpea a* ' + arq[1])
             break
             
@@ -2191,7 +2192,7 @@ case 'v':
             case 'apagar':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 await bocchi.sendText(from, 'Otsukaresama deshita~ 👋')
-                    .then(async () => await bocchi.bocchi())
+                    .then(async () => await bocchi.kill())
                     .catch(() => new Error('Target closed.'))
             break
             case 'premium':
