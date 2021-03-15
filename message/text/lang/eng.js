@@ -888,7 +888,7 @@ Uso: *${prefix}nivel*
 
 2. *${prefix}listadenivel*
 Consulte la tabla de clasificación.
-Otros usos: -
+Otros usos: *top*
 Uso: *${prefix}listadenivel*
 
 _Indice de menu [10]_
