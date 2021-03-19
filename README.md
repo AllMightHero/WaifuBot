@@ -151,178 +151,21 @@ PM2 with cron job  (restart after 5 hours):
 > pm2 monit
 ```
 
-Después de eso, escanee el código QR usando su WhatsApp en su teléfono!
+Después de eso, escanee el código QR usando su WhatsApp en su teléfono! 
 
-# Features
-If you want to unlock premium commands, please buy me a coffee at least 1 on Ko-fi platform.
+Contenido:
 
-|     Leveling     |  Availability  |
-| :--------------: | :------------: |
-| Leveling         |       ✔️       |
-| Set level color  |      Soon      |
-| Set bar color    |      Soon      |
+➸ *[1]* Descarga 
+➸ *[2]* Bot
+➸ *[3]* Diversos
+➸ *[4]* Sticker
+➸ *[5]* Otaku 
+➸ *[6]* Diversión 
+➸ *[7]* Grupos
+➸ *[8]* NSFW
+➸ *[9]* Dueño
+➸ *[10]* Nivel
 
-|     Sticker Maker     | Availability |
-| :-------------------: | :----------: |
-| Send/reply image      |      ✔️      |
-| Send/reply GIF        |      ✔️      |
-| Send/reply MP4        |      ✔️      |
-| Text to sticker       |      ✔️      |
-| Text to sticker GIF   |      ✔️      |
-| Sticker to image      |      ✔️      |
-| Sticker WM            |      ✔️      |
-| Take sticker          |      ✔️      |
-
-|      Downloader     | Availability |
-| :-----------------: | :----------: |
-| Facebook video      |      ✔️      |
-| YouTube audio/video |      ✔️      |
-| Joox musics         |      ✔️      |
-| TikTok video        |      ✔️      |
-| TikTok profile pic  |      ✔️      |
-| Twitter video/image |      ✔️      |
-| Instagram post      |      ✔️      |
-| Instagram story     |      ✔️      |
-| LK21                |      ✔️      |
-| TikTok no WM        |      ✔️      |
-
-|         Misc         | Availability |
-| :------------------: | :----------: |
-| Say                  |      ✔️      |
-| Search lyrics        |      ✔️      |
-| Shortlink maker      |      ✔️      |
-| Wikipedia (EN)       |      ✔️      |
-| Wikipedia (ID)       |      ✔️      |
-| KBBI scarper         |      ✔️      |
-| Stalk IG account     |      ✔️      |
-| GSMArena scraper     |      ✔️      |
-| Search food receipts |      ✔️      |
-| YouTube search       |      ✔️      |
-| Text to speech       |      ✔️      |
-| AFK                  |      ✔️      |
-| Distance calculator  |      ✔️      |
-| Sticker search       |      ✔️      |
-| Calculator           |      ✔️      |
-| Al-Qur'an surah      |      ✔️      |
-| List surah           |      ✔️      |
-| Random contact       |      ✔️      |
-| YouTube play         |      ✔️      |
-| Whois                |      ✔️      |
-| SMS gateway          |      ✔️      |
-| Al-Qur'an tafseer    |      ✔️      |
-| Al-Kitab search      |      ✔️      |
-| LK21 scraper         |      ✔️      |
-| Reminder             |      ✔️      |
-| Image uploader       |      ✔️      |
-| Sholat schedule      |      ✔️      |
-| Latest Line stickers |      ✔️      |
-| Check postage        |      ✔️      |
-| Sending email        |      ✔️      |
-| Random quotes        |      ✔️      |
-| Genshin chara info   |      ✔️      |
-| Bass boost           |      ✔️      |
-
-|          Fun          | Availability |
-| :-------------------: | :----------: |
-| Weton jodoh           |      ✔️      |
-| Horoscope             |      ✔️      |
-| Harta tahta maker     |      ✔️      |
-| Writing text maker    |      ✔️      |
-| Glitch text maker     |      ✔️      |
-| SimSimi chatbot       |      ✔️      |
-| Blackpink logo maker  |      ✔️      |
-| Pornhub logo maker    |      ✔️      |
-| Galaxy text maker     |      ✔️      |
-| Truth or dare         |      ✔️      |
-| Asupan TikTok         |      ✔️      |
-| PH comment maker      |      ✔️      |
-| Triggered maker       |      ✔️      |
-| Kiss image maker      |      ✔️      |
-| 3D text maker         |      ✔️      |
-| Freefire logo maker   |      ✔️      |
-| Freefire banner maker |      ✔️      |
-| Sliding text maker    |      ✔️      |
-| Hero ML maker         |      ✔️      |
-| Fire text maker       |      ✔️      |
-| Couple balloon maker  |      ✔️      |
-| Wasted maker          |      ✔️      |
-| Cakl Lontong quiz     |      ✔️      |
-| Hilih-ify text        |      ✔️      |
-| Tebak gambar quiz     |      ✔️      |
-| Random doge stickers  |      ✔️      |
-| Dice                  |      ✔️      |
-
-|       Weeb Zone       | Availability |
-| :-------------------: | :----------: |
-| Random neko girl      |      ✔️      |
-| Random wallpaper      |      ✔️      |
-| Random kemonomimi     |      ✔️      |
-| Kusonime scraper      |      ✔️      |
-| Komiku scraper        |      ✔️      |
-| Anime tracer          |      ✔️      |
-| Source finder         |      ✔️      |
-| Random waifu pics     |      ✔️      |
-| Anitoki latest update |      ✔️      |
-| Random anime stickers |      ✔️      |
-| Neonime latest update |      ✔️      |
-| Anoboy on-going list  |      ✔️      |
-| Search character      |      ✔️      |
-
-|        Bot       | Availability |
-| :--------------: | :----------: |
-| Server usage     |      ✔️      |
-| Blocked list     |      ✔️      |
-| Ping             |      ✔️      |
-| Delete messages  |      ✔️      |
-| Bug report       |      ✔️      |
-| Join group       |      ✔️      |
-| Check serials    |      ✔️      |
-
-|        Owner       | Availability |
-| :----------------: | :----------: |
-| Broadcasting       |      ✔️      |
-| Clear all messages |      ✔️      |
-| Leave all groups   |      ✔️      |
-| Get snapshot       |      ✔️      |
-| Ban                |      ✔️      |
-| Eval               |      ✔️      |
-| Shutdown           |      ✔️      |
-| Add premium user   |      ✔️      |
-| Set bot's info     |      ✔️      |
-| Mute bot           |      ✔️      |
-
-|    Moderation    | Availability |
-| :--------------: | :----------: |
-| Add              |      ✔️      |
-| Kick             |      ✔️      |
-| Promote          |      ✔️      |
-| Demote           |      ✔️      |
-| Leave bot        |      ✔️      |
-| Everyone         |      ✔️      |
-| Toogle NSFW      |      ✔️      |
-| Set group icon   |      ✔️      |
-| Anti-group link  |      ✔️      |
-| Toogle welcome   |      ✔️      |
-| Auto-sticker     |      ✔️      |
-| Mute group       |      ✔️      |
-| Anti-NSFW link   |      ✔️      |
-| Anti-porn        |    Premium   |
-
-|        NSFW        | Availability |
-| :----------------: | :----------: |
-| Lewds              |      ✔️      |
-| nHentai lookup     |      ✔️      |
-| Fetish             |      ✔️      |
-| Latest Nekopoi     |      ✔️      |
-| Pornhub downloader |      ✔️      |
-| Waifu 18+          |      ✔️      |
-| Yuri               |      ✔️      |
-| Femdom             |      ✔️      |
-| Lewd avatars       |      ✔️      |
-| nHentai search     |      ✔️      |
-| nHentai downloader | Premium/Free |
-| Multi-lewds        |    Premium   |
-| Multi-fetish       |    Premium   |
 
 # Thanks to
 * [`open-wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
