@@ -54,6 +54,8 @@ moment.tz.setDefault('Asia/Jakarta').locale('id')
 const genshin = require('genshin')
 const google = require('google-it')
 const cron = require('node-cron')
+const ytsr = require ('ytsr')
+const ytdl = require ('ytdl-core')
 /********** END OF MODULES **********/
 
 /********** UTILS **********/
@@ -158,7 +160,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
        
         // Simple anti virtext, sorted by chat length, by: VideFrelan
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
-            if (chats.length > 5000) {
+            if (chats. length > 5000) {
                 await bocchi.sendTextWithMentions(from, `Detectado @${sender.id} exceso de texto \nTendre que sacarte!`)
                 await bocchi.removeParticipant(groupId, sender.id)
              }
@@ -230,7 +232,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
         // Anti-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
-            if (chats.match(new RegExp(/(https:\/\/chat.whatsapp.com)/gi))) {
+            if (chats. match(new RegExp(/(https:\/\/chat.whatsapp.com)/gi))) {
                 const valid = await bocchi.inviteInfo(chats)
                 if (valid) {
                     console.log(color('[KICK]', 'red'), color('Received a group link and it is a valid link!', 'yellow'))
@@ -244,7 +246,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
         // Anti-fake-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
-            if (chats.match(new RegExp(/(https:\/\/chat.(?!whatsapp.com))/gi))) {
+            if (chats. match(new RegExp(/(https:\/\/chat.(?!whatsapp.com))/gi))) {
                 console.log(color('[KICK]', 'red'), color('Received a fake group link.', 'yellow'))
                 await bocchi.reply(from, 'Fake group link detected!', id)
                 await bocchi.removeParticipant(groupId, sender.id)
@@ -500,69 +502,106 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
             // DESCARGAS
                        case 'musica':
-    if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-    if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
-    axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
-    .then(async (res) => {
-        const pyre = res.data.result.result[0].publishedTime
-        if (pyre == '' || pyre == 'null' || pyre == null || pyre == undefined || pyre == 'undefined') {
-            var playre = 'Indefinido'
-        } else if (pyre.endsWith('years ago')) {
-            var playre = pyre.replace('years ago', 'Anios atras')
-        } else if (pyre.endsWith('hours ago')) {
-            var playre = pyre.replace('hours ago', 'Horas atras')
-        } else if (pyre.endsWith('minutes ago')) {
-            var playre = pyre.replace('minutes ago', 'Minutos atras')
-        } else if (pyre.endsWith('day ago')) {
-            var playre = pyre.replace('day ago', 'Dia atras')
-        } else if (pyre.endsWith('months ago')) {
-            var playre = pyre.replace('months ago', 'Meses atras')
-        } else if (pyre.endsWith('seconds ago')) {
-            var playre = pyre.replace('seconds ago', 'Segundos atras')
-        }
-        const asize = await axios.get(`http://st4rz.herokuapp.com/api/yta?url=http://youtu.be/${res.data.result.result[0].id}`)
-        const afsize = asize.data.filesize.replace(' MB', '')
-        console.log(afsize)
-            await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${playre}\n\n Visualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto!`, id)
-            axios.get(`http://st4rz.herokuapp.com/api/yta2?url=http://youtu.be/${res.data.result.result[0].id}`)
-            .then(async(rest) => {
-                var m3pa = rest.data.result
-                var m3ti = rest.data.title
-                await bocchi.sendFileFromUrl(from, m3pa, '', '', id)
-                    })
-                    
-    })
-    break
+                if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica « nombre » o « enlace »`, id)
+                await bocchi.reply(from, `*Descargando musica...*`, id)
+                const playOptions = {
+                    limit: 1,
+                    gl: 'ID',
+                    hl: 'pt'
+                }
+                const res = await ytsr(body.slice(6), playOptions).catch(err => {
+                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese título`, id)
+                })
+
+                const videoResult = res.items.filter(item => item.type === 'video')[0]
+
+                if (!videoResult) {
+                    return bocchi.reply(from, `No puedo encontrar alguna música en YouTube con ese título`, id)
+                }
+
+                const playInfo = await ytdl.getInfo(videoResult.url, {
+                    quality: 'highestaudio'
+                });
+
+                let playStream = ytdl(videoResult.url, {
+                    quality: 'highestaudio'
+                });
+
+                let songPlayInfo = {
+                    title: playInfo.videoDetails.title,
+                    url: playInfo.videoDetails.video_url,
+                    lengthSeconds: playInfo.videoDetails.lengthSeconds,
+                    authorName: playInfo.videoDetails.author.name,
+                    videoId: playInfo.videoDetails.videoId,
+                    isPrivate: playInfo.videoDetails.isPrivate,
+                }
+        const durase = `${songPlayInfo.lengthSeconds}/60`
+                console.log(durase)
+                bocchi.sendFileFromUrl(from, videoResult.bestThumbnail.url, 'yt.jpg', `*PLAY YOUTUBE MP3*\n\n*Titulo:*  ${songPlayInfo.title.replace('Official','').replace('Unofficial','').replace('Cover','').replace('Video','').replace('Clip','').replace('|','').replace('Music','').replace('UNOFFICIAL','').replace('OFFICIAL','').replace('MUSIC','').replace('VIDEO','').replace('(','').replace(')','').replace('lirik','').replace('Lyric','').replace('Lirik','')}\n\n*Formato Del Archivo:*  MPEG-2 Audio Layer III\n\n*Enviando tu audio...*\n\n*Espere...*`, id)
+
+                //console.log(songinfo);
+                let testPlaySize = (((songPlayInfo.lengthSeconds * 128000) / 8) / 1024) / 1024
+                console.log(`Tamaño de la musica : ${testPlaySize} MB`);
+
+                if (testPlaySize >= 15) {
+                    return bocchi.reply(from, `Lo siento el limite de audio es de 15MB.`, id)
+                }
+
+                if (songPlayInfo.lengthSeconds > 900) {
+                    return bocchi.reply(from, `Lo siento el limite de audio es de 15 minutos.`, id)
+                }
+
+                ffmpeg(playStream)
+                    .audioBitrate(128)
+                    .save(`./temp/${songPlayInfo.videoId}.mp3`)
+                    .on('end', () => {
+                        var playStats = fs.statSync(`./temp/${songPlayInfo.videoId}.mp3`)
+                        let realSize = playStats.size / (1024 * 1024);
+                        console.log(`Tamaño original: ${realSize} MB`);
+                        if (realSize <= 15) {
+                            bocchi.sendFile(from, `./temp/${songPlayInfo.videoId}.mp3`, `${songPlayInfo.videoId}.mp3`, null, id).then(f => {
+                                try {
+                                    fs.unlinkSync(`./temp/${songPlayInfo.videoId}.mp3`);
+                                    console.log(`Archivo Temporal Eliminado: ${songPlayInfo.videoId}.mp3`);
+                                    bocchi.reply(from, `Archivo Temporal Eliminado: ${songPlayInfo.videoId}.mp3`);
+                                } catch (err) {
+                                    // handle the error
+                                    console.log(err);
+                                }
+                            })
+                        } else {
+                            return bocchi.reply(from, `Upsss no he podido descargar la música señor.`, id)
+                        }
+                    });
+                break
 case 'video':
-    if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-    if (args.length == 0) return bocchi.reply(from, 'Lo usaste incorrectamente.', id)
-    axios.get(`https://docs-jojo.herokuapp.com/api/yt-search?q=${body.slice(6)}`)
-    .then(async (res) => {
-        const vyre = res.data.result.result[0].publishedTime
-        if (vyre == '' || vyre == 'null' || vyre == null || vyre == undefined || vyre == 'undefined') {
-            var videore = 'Indefinido'
-        } else if (vyre.endsWith('years ago')) {
-            var videore = vyre.replace('years ago', 'Anios atrÃ¡s')
-        } else if (vyre.endsWith('hours ago')) {
-            var videore = vyre.replace('hours ago', 'Horas atras')
-        } else if (vyre.endsWith('minutes ago')) {
-            var videore = vyre.replace('minutes ago', 'Minutos atras')
-        } else if (vyre.endsWith('day ago')) {
-            var videore = vyre.replace('day ago', 'Dia atras')
-        } else if (vyre.endsWith('months ago')) {
-            var videore = vyre.replace('months ago', 'Meses atras')
-        } else if (vyre.endsWith('seconds ago')) {
-            var videore = vyre.replace('seconds ago', 'Segundos atras')
-        }
-        const size = await axios.get(`http://st4rz.herokuapp.com/api/ytv?url=http://youtu.be/${res.data.result.result[0].id}}`)
-             await bocchi.sendFileFromUrl(from, `${res.data.result.result[0].thumbnails[0].url}`, ``, `Titulo: ${res.data.result.result[0].title}\n\nLink: https://youtu.be/${res.data.result.result[0].id}\n\nDuracion: ${res.data.result.result[0].duration} minutos\n\nHace: ${videore}\n\nVisualizaciones: ${res.data.result.result[0].viewCount.text}\n\nEspero haberlo hecho bien y ... ahora solo espera, no lo vuelvas a usar hasta que termine esto`, id)
-            axios.get(`http://st4rz.herokuapp.com/api/ytv2?url=https://youtu.be/${res.data.result.result[0].id}`)
-            .then(async(rest) => {
-                await bocchi.sendFileFromUrl(from, `${rest.data.result}`, ``, ``, id)
-                    })
-       
-    })
-    break
+                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video « nombre » o « enlace »`, id)
+                await bocchi.reply(from, `*Descargando video...*`, id)
+                const resa = await ytsr(body.slice(6)).catch(err => {
+                    return bocchi.reply(from, `No puedo encontrar algun video en YouTube con ese título`, id)
+                })
+                const videoDatas = resa.items.filter(item => item.type === 'video')[0];
+                //console.log(videoDatas)
+                console.log(videoDatas.url)
+                var viidio = videoDatas.url.replace('https://m.youtu.be/', '').replace('https://youtu.be/', '').replace('https://www.youtube.com/', '').replace('watch?v=', '')
+                let info = await ytdl.getInfo(viidio);
+                let format = ytdl.chooseFormat(info.formats, { quality: '18' });
+                //console.log('Format found!', format)
+                if (format.contentLength >= 35000000) {
+                        return bocchi.reply(from, `Lo siento el limite de video es de 35MB.`, id)
+                    } else {
+                await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','Años atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
+                    }
+                console.log('Video Enviado Exitosamente.')
+                break
+                case 'fb':
+			case 'facebook':
+                    await bocchi.reply(from, ind.wait(), id)
+require('fb-video-downloader').getInfo(q).then(info => {
+console.log(JSON.stringify(info, null, 2))
+bocchi.sendFileFromUrl(from, info.download.sd, 'fb.mp4', ' *FACEBOOK MP4*\n\n*Titulo:*  ' + `${info.title}` +'',id)
+})
+            break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -1125,6 +1164,13 @@ case 'video':
             bocchi.sendPtt(from, './audios/smash.mp3', id)
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *golpea a* ' + arq[1])
             break
+            case 'logo':
+			    if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+				if (args.length == 0) bocchi.reply(from, 'Coloca un nombre!', id)
+			await bocchi.reply(from, eng.wait(), id)
+			await bocchi.sendFileFromUrl(from, `https://docs-jojo.herokuapp.com/api/gaming?text=${body.slice(6)}`, '', '', id)
+			break
             
             // STICKER 
                     case 'stiker':
@@ -1378,6 +1424,33 @@ case 'video':
                                 bocchi.reply(from, 'Envie una imagen con la etiqueta *-stickernobg*', id)
                             }
                             break
+                            case 'emoji':
+                            case 'emot':
+                 if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+                if (!q) return await bocchi.reply(from, `Formato incorrecto`, id)
+                try {
+                await bocchi.reply(from, eng.wait(), id)
+                const emoji = emojiUnicode(q)
+                await bocchi.sendImageAsSticker(from, await bocchi.download(`https://videfikri.com/api/emojitopng/?emojicode=${emoji}`), { author: '@Orumaito', pack: 'Creado por WaifuBot' })
+                } catch (err) {
+                    console.error(err)
+                    await bocchi.reply(from, 'Error!', id)
+                }
+            break
+            case 'colores': // By Poker fix the emojis
+            if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
+            if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+            const colorstick = body.slice(9)
+            try {
+                const ttpc = await axios.get(`https://api.xteam.xyz/attp?text=${encodeURIComponent(colorstick)}`)
+                const attp = ttpc.data.result
+                await bocchi.sendImageAsSticker(from, attp, { author: '@Orumaito', pack: 'Creado por WaifuBot' })
+            } catch(err) {
+                console.error(err)
+                await bocchi.reply(from, 'Error!', id)
+            }
+            break
 
             // NSFW
             case 'lewds':
