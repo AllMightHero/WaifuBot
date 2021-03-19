@@ -99,7 +99,7 @@ exports.notRegistered = () => {
 }
 
 exports.registered = (name, age, userId, time, serial) => {
-    return `*「 REGISTRO 」*\n\nSu cuenta se registro con exito con los datos:\n\n➸ *Nombre*: ${name}\n➸ *Edad*: ${age}\n➸ *ID*: ${userId}\n➸ *Tiempo registrado*: ${time}\n➸ *Serial*: ${serial}\n\nNote:\nNO compartas tu *serial* con otros!\n\n Considera leer las reglas *${prefix}rules* primero.`
+    return `*「 REGISTRO 」*\n\nSu cuenta se registro con exito con los datos:\n\n➸ *Nombre*: ${name}\n➸ *Edad*: ${age}\n➸ *ID*: ${userId}\n➸ *Tiempo registrado*: ${time}\n➸ *Serial*: ${serial}\n\nNote:\nNO compartas tu *serial* con otros!\n\n Considera leer las reglas *${prefix}reglas* primero.`
 }
 
 exports.registeredAlready = () => {
@@ -322,21 +322,26 @@ exports.menuDownloader = () => {
     return `
 -----[ DESCARGA ]-----
 1. *${prefix}musica* ( *NO USE CONTINUAMENTE* )
-Reproduce canciones de YouTube
+Descarga canciones de YouTube
 Otros usos: -
-Uso: *${prefix}musica* *Artista+Cancion*
+Uso: *${prefix}musica* Artista+Cancion/Link
 
 2. *${prefix}video* ( *NO USE CONTINUAMENTE* )
-Reproduce videos de YouTube
+Descarga videos de YouTube
 Otros usos: -
-Uso: *${prefix}video* *Artista+Cancion*
+Uso: *${prefix}video* Artista+Cancion/Link
 
-3. *${prefix}moddroid*
+3. *${prefix}fb*
+Descarga videos de Facebook
+Otros usos: *facebook*
+Uso:  *${prefix}fb* link
+
+4. *${prefix}moddroid*
 Buscar un mod en moddroid.
 Otros usos: -
 Uso: *${prefix}moddroid* nombre de APK. 
 
-4. *${prefix}happymod*
+5. *${prefix}happymod*
 Buscar un mod en happymod.
 Otros usos: -
 Uso: *${prefix}happymod* nombre de APK. 
@@ -368,11 +373,6 @@ Uso: *${prefix}estado*
 Verifique los números bloqueados.
 Otros usos: -
 Uso: *${prefix}bloqueados*
-
-5. *${prefix}activo*
-Verifique el tiempo de actividad del bot.
-Otros usos: -
-Uso: *${prefix}activo*
 
 5. *${prefix}ping*
 Comprueba la velocidad del bot.
@@ -423,6 +423,10 @@ Uso: *${prefix}listapremium*
 Verifique su límite restante.
 Otros usos: -
 Uso: *${prefix}limite*
+
+15. *${prefix}activo*
+Verifique el tiempo de actividad del bot. 
+Uso: *${prefix}activo*
 
 _Indice de menu [2]_
     `
@@ -553,10 +557,19 @@ Crea una imagen y sticker con los colores de la bandera gay.
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}gay* o responde a una imagen con el comando *${prefix}gay*.
 
-10. *{prefix}nobg*
+10. *${prefix}nobg*
 Crea Stickers sin fondo (exclusivo para el propietario). 
 Otros usos: *recorte*
 Uso: Envie una imagen con el comando *${prefix}nobg*
+
+11. *${prefix}emoji*
+Crea un sticker de un emoji (solo algunos) 
+Otros usos : - 
+Uso: Responda a un emoji con el comando *${prefix}emoji*
+
+12. *${prefix}colores*
+Crea un sticker de texto/emoji con colores. 
+Uso: *${prefix}emoji* texto/emoji 
 
 _Indice de menu [4]_
     `
@@ -623,6 +636,10 @@ Uso:  *${prefix}besar* @miembro1
 Golpea a alguien del grupo. 
 Otros usos. - 
 Uso:  *${prefix}golpear* @miembro1
+
+9. *${prefix}logo*
+Otros usos: - 
+Uso: *{prefix}logo* Nombre. 
 
 
 _Indice de menu [6]_
