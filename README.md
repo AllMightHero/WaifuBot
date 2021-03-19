@@ -131,6 +131,8 @@ Nos dará una devolución de llamada como `SUCCESS: se guardó el valor especifi
 > npm install
 > npm install remove.bg
 > apt-get install ffmpeg
+> npm i ytdl-core 
+> npm i ytsr
 ```
 
 ## 🆗 Ejecute el bot
