@@ -595,13 +595,7 @@ case 'video':
                 console.log('Video Enviado Exitosamente.')
                 break
                 case 'fb':
-			case 'facebook':
-                    await bocchi.reply(from, ind.wait(), id)
-require('fb-video-downloader').getInfo(q).then(info => {
-console.log(JSON.stringify(info, null, 2))
-bocchi.sendFileFromUrl(from, info.download.sd, 'fb.mp4', ' *FACEBOOK MP4*\n\n*Titulo:*  ' + `${info.title}` +'',id)
-})
-            break
+                break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
