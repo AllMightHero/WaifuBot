@@ -16,9 +16,9 @@ const start = (bocchi = new Client()) => {
     console.log(color(figlet.textSync('BocchiBot', 'Larry 3D'), 'cyan'))
     console.log(color('=> Bot successfully loaded! Database:', 'yellow'), color(loader.getAllDirFiles('./database').length), color('Library:', 'yellow'), color(loader.getAllDirFiles('./lib').length), color('Function:', 'yellow'), color(loader.getAllDirFiles('./function').length))
     console.log(color('=> Source code version:', 'yellow'), color(version))
-    console.log(color('=> Bugs? Errors? Suggestions? Visit here:', 'yellow'), color(bugs.url))
-    console.log(color('[BOCCHI]'), color('BocchiBot is now online!', 'yellow'))
-    console.log(color('[DEV]', 'cyan'), color('Welcome back, Owner! Hope you are doing well~', 'magenta'))
+    console.log(color('=> Bugs? Errores? Preguntas? Entre aqui:', 'yellow'), color(bugs.url))
+    console.log(color('[BOCCHI]'), color('WaifuBot esta ahora online!', 'yellow'))
+    console.log(color('[DEV]', 'cyan'), color('Bienvenido de vuelta Orumaito', 'magenta'))
 
     // Uncomment code di bawah untuk mengaktifkan auto-update file changes. Tidak disarankan untuk long-time use.
     // loader.nocache('../message/index.js', (m) => console.log(color('[WATCH]', 'orange'), color(`=> '${m}'`, 'yellow'), 'file is updated!'))
