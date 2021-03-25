@@ -331,17 +331,12 @@ Descarga videos de YouTube
 Otros usos: -
 Uso: *${prefix}video* Artista+Cancion/Link
 
-3. *${prefix}fb*
-Descarga videos de Facebook
-Otros usos: *facebook*
-Uso:  *${prefix}fb* link
-
-4. *${prefix}moddroid*
+3. *${prefix}moddroid*
 Buscar un mod en moddroid.
 Otros usos: -
 Uso: *${prefix}moddroid* nombre de APK. 
 
-5. *${prefix}happymod*
+4. *${prefix}happymod*
 Buscar un mod en happymod.
 Otros usos: -
 Uso: *${prefix}happymod* nombre de APK. 
