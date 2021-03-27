@@ -594,8 +594,25 @@ case 'video':
                     }
                 console.log('Video Enviado Exitosamente.')
                 break
+                case 'facebook':
                 case 'fb':
-                break
+                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isUrl(url) && !url.includes('facebook.com')) return await bocchi.reply(from, eng.wrongFormat(), id)
+                await bocchi.reply(from, eng.wait(), id)
+                downloader.fb(url)
+                    .then(async (res) => {
+                        if (res.status === 'error') {
+                            await bocchi.reply(from, res.pesan, id)
+                        } else {
+                            await bocchi.sendFileFromUrl(from, res.result.url, 'video.mp4', '*FACEBOOK Video*', id)
+                            console.log('Success sending Facebook video!')
+                        }
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await bocchi.reply(from, 'Error!', id)
+                    })
+            break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
