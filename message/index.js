@@ -548,7 +548,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 }
 
                 if (songPlayInfo.lengthSeconds > 900) {
-                    return bocchi.reply(from, `Lo siento el limite de audio es de 15 minutos.`, id)
+                    return bocchi.reply(from, `Lo siento el limite de audio es de 15MB.`, id)
                 }
 
                 ffmpeg(playStream)
@@ -587,8 +587,8 @@ case 'video':
                 let info = await ytdl.getInfo(viidio);
                 let format = ytdl.chooseFormat(info.formats, { quality: '18' });
                 //console.log('Format found!', format)
-                if (format.contentLength >= 35000000) {
-                        return bocchi.reply(from, `Lo siento el limite de video es de 35MB.`, id)
+                if (format.contentLength >= 45000000) {
+                        return bocchi.reply(from, `Lo siento el limite de video es de 45MB.`, id)
                     } else {
                 await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','Años atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
                     }
@@ -1267,22 +1267,17 @@ case 'video':
                     await bocchi.reply(from, ind.wrongFormat(), id)
                 }
             break
-                 case 'ttp': // CHIKAA CHANTEKKXXZZ
-                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
-                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
-                limit.addLimit(sender.id, _limit, isPremium, isOwner)
-                await bocchi.reply(from, ind.wait(), id)
-                misc.ttp(q)
-                    .then(async (res) => {
-                        await bocchi.sendImageAsSticker(from, res.base64)
-                        console.log('Success creating TTP!')
-                    })
-                    .catch(async (err) => {
-                        console.error(err)
-                        await bocchi.reply(from, 'Error!', id)
-                    })
-            break
+case 'ttp':
+			    if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+				await bocchi.reply(from, eng.wait(), id)
+			if (args.length == 0) return bocchi.reply(from, 'Falta la frase', id)
+			
+			axios.get(`https://api.areltiyan.site/sticker_maker?text=${body.slice(5)}`)
+			.then(res => {
+				bocchi.sendImageAsSticker(from, res.data.base64, { author: '@Orumaito' , pack: 'Creado por WaifuBot', keepScale:'true'})
+			})
+			break
                     case 'cstick':  // By: Orumaito  
 	                case 'renombrar':   
                     if (args.length == 0) return bocchi.reply(from, `Para cambiarle el nombre de paquete y de autor a un sticker mencionalo junto al comando:\n\n*${prefix}cstick (nombre del paquete) | (autor)*\n\n_Es obligatorio que uses esta rata *" | "* para dividir cada texto......_\n\nejemplo: *${prefix}cstick (WaifuBot) | (@Orumaito)*\n\n*Intenta usar letras y n?meros originales... para que no hayan problema con el cambio de nombres.*`, id)
