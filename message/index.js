@@ -87,6 +87,7 @@ let _limit = JSON.parse(fs.readFileSync('./database/user/limit.json'))
 const _afk = JSON.parse(fs.readFileSync('./database/user/afk.json'))
 const _reminder = JSON.parse(fs.readFileSync('./database/user/reminder.json'))
 const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
+const _stick = JSON.parse(fs.readFileSync('./database/bot/sticker.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
 let { memberLimit, groupLimit } = _setting
 /********** END OF DATABASES **********/
@@ -158,14 +159,6 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             timezone: 'Asia/Jakarta'
         })
        
-        // Simple anti virtext, sorted by chat length, by: VideFrelan
-        if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
-            if (chats. length > 5000) {
-                await bocchi.sendTextWithMentions(from, `Detectado @${sender.id} exceso de texto \nTendre que sacarte!`)
-                await bocchi.removeParticipant(groupId, sender.id)
-             }
-         }
-
         // ROLE (Change to what you want, or add) and you can change the role sort based on XP.
         const levelRole = level.getLevelingLevel(sender.id, _level)
         var role = 'COBRE  V'
@@ -244,6 +237,21 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             }
         }
 
+       // Anti virtext by: @VideFrelan
+        if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
+           if (chats.length > 5000) {
+               await bocchi.sendTextWithMentions(from, `@${sender.id} is detected sending a virtext.\nYou will be kicked!`)
+               await bocchi.removeParticipant(groupId, sender.id)
+            }
+        } 
+               
+        // Sticker keywords by: @hardianto02_
+        if (isGroupMsg && isRegistered) {
+            if (_stick.includes(chats)) {
+                await bocchi.sendImageAsSticker(from, `./temp/sticker/${chats}.webp`, { author: '@Orumaito' , pack: 'Creado por WaifuBot' })
+            }
+        }
+        
         // Anti-fake-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
             if (chats. match(new RegExp(/(https:\/\/chat.(?!whatsapp.com))/gi))) {
@@ -446,7 +454,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 if (!isGroupMsg) return await bocchi.reply(from. ind.groupOnly(), id)
                 const resp = _level
                 _level.sort((a, b) => (a.xp < b.xp) ? 1 : -1)
-                let leaderboard = '-----[ *TABLA DE CLASIFICACION * ]----\n\n'
+                let leaderboard = '-----[ *TABLA DE CLASIFICACION* ]----\n\n'
                 try {
                     for (let i = 0; i < 10; i++) {
                         var roles = 'COBRE  V'
@@ -502,7 +510,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
             // DESCARGAS
                        case 'musica':
-                if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica � nombre � o � enlace �`, id)
+                if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica � nombre � o � enlace �`, id)
                 await bocchi.reply(from, `*Descargando musica...*`, id)
                 const playOptions = {
                     limit: 1,
@@ -510,13 +518,13 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     hl: 'pt'
                 }
                 const res = await ytsr(body.slice(6), playOptions).catch(err => {
-                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese t�tulo`, id)
                 })
 
                 const videoResult = res.items.filter(item => item.type === 'video')[0]
 
                 if (!videoResult) {
-                    return bocchi.reply(from, `No puedo encontrar alguna m�sica en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar alguna m�sica en YouTube con ese t�tulo`, id)
                 }
 
                 const playInfo = await ytdl.getInfo(videoResult.url, {
@@ -541,7 +549,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
                 //console.log(songinfo);
                 let testPlaySize = (((songPlayInfo.lengthSeconds * 128000) / 8) / 1024) / 1024
-                console.log(`Tama�o de la musica : ${testPlaySize} MB`);
+                console.log(`Tama�o de la musica : ${testPlaySize} MB`);
 
                 if (testPlaySize >= 15) {
                     return bocchi.reply(from, `Lo siento el limite de audio es de 15MB.`, id)
@@ -557,7 +565,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     .on('end', () => {
                         var playStats = fs.statSync(`./temp/${songPlayInfo.videoId}.mp3`)
                         let realSize = playStats.size / (1024 * 1024);
-                        console.log(`Tama�o original: ${realSize} MB`);
+                        console.log(`Tama�o original: ${realSize} MB`);
                         if (realSize <= 15) {
                             bocchi.sendFile(from, `./temp/${songPlayInfo.videoId}.mp3`, `${songPlayInfo.videoId}.mp3`, null, id).then(f => {
                                 try {
@@ -570,15 +578,15 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                                 }
                             })
                         } else {
-                            return bocchi.reply(from, `Upsss no he podido descargar la m�sica se�or.`, id)
+                            return bocchi.reply(from, `Upsss no he podido descargar la música señor.`, id)
                         }
                     });
                 break
 case 'video':
-                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video � nombre � o � enlace �`, id)
+                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video � nombre � o � enlace �`, id)
                 await bocchi.reply(from, `*Descargando video...*`, id)
                 const resa = await ytsr(body.slice(6)).catch(err => {
-                    return bocchi.reply(from, `No puedo encontrar algun video en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar algun video en YouTube con ese t�tulo`, id)
                 })
                 const videoDatas = resa.items.filter(item => item.type === 'video')[0];
                 //console.log(videoDatas)
@@ -587,10 +595,10 @@ case 'video':
                 let info = await ytdl.getInfo(viidio);
                 let format = ytdl.chooseFormat(info.formats, { quality: '18' });
                 //console.log('Format found!', format)
-                if (format.contentLength >= 45000000) {
+                if (format.contentLength >= 4500000) {
                         return bocchi.reply(from, `Lo siento el limite de video es de 45MB.`, id)
                     } else {
-                await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','A�os atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
+                await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','A�os atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
                     }
                 console.log('Video Enviado Exitosamente.')
                 break
@@ -624,7 +632,7 @@ case 'video':
                         if (status !== 200) {
                             await bocchi.reply(from, 'Not found.', id)
                         } else {
-                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Publicado*: ${result[0].publisher}\n➸ *Version*: ${result[0].latest_version}\n➸ *Genero*: ${result[0].genre}\n\n*Link de descarga*\n${result[0].download}`, id)
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Publicado*: ${result[0].publisher}\n➸ *Version*: ${result[0].latest_version}\n➸ *Genero*: ${result[0].genre}\n\n*Link de descarga*\n${result[0].download}`, id)
                             console.log('Success sending APK mod!')
                         }
                     })
@@ -644,7 +652,7 @@ case 'video':
                         if (status !== 200) {
                             await bocchi.reply(from, 'Not found.', id)
                         } else {
-                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Root*: ${result[0].root}\n➸ *Version*: ${result[0].version}\n➸ *Precio*: ${result[0].price}\n\n*Link de descarga*\n${result[0].download}`, id)
+                            await bocchi.sendFileFromUrl(from, result[0].image, 'ksk.jpg', `*「 MOD ENCONTRADO 」*\n\n➸ *APK*: ${result[0].title}\n\n➸ *Tama�o*: ${result[0].size}\n➸ *Root*: ${result[0].root}\n➸ *Version*: ${result[0].version}\n➸ *Precio*: ${result[0].price}\n\n*Link de descarga*\n${result[0].download}`, id)
                             console.log('Success sending APK mod!')
                         }
                     })
@@ -717,21 +725,7 @@ case 'video':
                 await bocchi.reply(from, 'Looking for a partner...', id)
                 await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
                 await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
-            case 'ip':
-                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (args.length !== 1) return await bocchi.reply(from, ind.wrongFormat(), id)
-                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
-                limit.addLimit(sender.id, _limit, isPremium, isOwner)
-                await bocchi.reply(from, ind.wait(), id)
-                misc.whois(args[0])
-                    .then(async ({ result }) => {
-                        await bocchi.reply(from, `*「 WHOIS 」*\n\n➸ *IP address*: ${result.ip_address}\n➸ *City*: ${result.city}\n➸ *Region*: ${result.region}\n➸ *Country*: ${result.country}\n➸ *ZIP code*: ${result.postal_code}\n➸ *Latitude and longitude*: ${result.latitude_longitude}\n➸ *Time zone*: ${result.time_zone}\n➸ *Call code*: ${result.calling_code}\n➸ *Currency*: ${result.currency}\n➸ *Language code*: ${result.languages}\n➸ *ASN*: ${result.asn}\n➸ *Organization*: ${result.org}`, id)
-                    })
-                    .catch(async (err) => {
-                        console.error(err)
-                        await bocchi.reply(from, 'Error!', id)
-                    })
-            break
+            break 
             case 'recordatorio': // by Slavyan
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!q.includes('|')) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -1008,7 +1002,7 @@ case 'video':
             break
             case 'limite':
                 if (isPremium || isOwner) return await bocchi.reply(from, '⤞ Limite: ∞ (ILIMITADO)', id)
-                await bocchi.reply(from, `⤞ Limite: ${limit.getLimit(sender.id, _limit, limitCount)} / 25\n\n*_El l�mite se restablece en 00:00 HORAS_*`, id)
+                await bocchi.reply(from, `⤞ Limite: ${limit.getLimit(sender.id, _limit, limitCount)} / 25\n\n*_El l�mite se restablece en 00:00 HORAS_*`, id)
             break
             
             // ZONA OTAKU
@@ -1196,6 +1190,30 @@ case 'video':
                     const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
                     
                     await bocchi.sendImageAsSticker(from, imageBase64, { author: '@Orumaito', pack: 'Creado por WaifuBot', keepScale:'true'})
+                        .then(async () => {
+                            await bocchi.sendText(from, eng.ok())
+                            console.log(`Sticker processed for ${processTime(t, moment())} seconds`)
+                        })
+                        .catch(async (err) => {
+                            console.error(err)
+                            await bocchi.reply(from, 'Error!', id)
+                        })
+                } else {
+                    await bocchi.reply(from, eng.wrongFormat(), id)
+                }
+            break
+            case 'circular':
+            case 'stikerc':
+                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+                if (isMedia && isImage || isQuotedImage) {
+                    await bocchi.reply(from, eng.wait(), id)
+                    const encryptMedia = isQuotedImage ? quotedMsg : message
+                    const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
+                    
+                    await bocchi.sendImageAsSticker(from, imageBase64, { circle:true, author: '@Orumaito ', pack: 'Creado por WaifuBot '})
                         .then(async () => {
                             await bocchi.sendText(from, eng.ok())
                             console.log(`Sticker processed for ${processTime(t, moment())} seconds`)
@@ -2191,7 +2209,7 @@ case 'ttp':
             case 'wame':
 		await bocchi.reply(from, `wa.me/${sender.id.replace(/@c.us/g, '')}`, id)
 	        break
-            // COMANDOS DEL DUE�O 
+            // COMANDOS DEL DUE�O 
             case 'transmision':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (!q) return await bocchi.reply(from, ind.emptyMess(), id)
