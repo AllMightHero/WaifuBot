@@ -465,12 +465,7 @@ Obtenga un contacto aleatorio (en privado).
 Otros usos: -
 Uso: *${prefix}aleatorio*
 
-6. *${prefix}IP*
-Búsqueda de IP.
-Otros usos: -
-Uso: *${prefix}IP* direccion de IP. 
-
-7. *${prefix}recordatorio*
+6. *${prefix}recordatorio*
 Recordatorio. 
 *s* - segundos
 *m* - minutos
@@ -479,27 +474,27 @@ Recordatorio.
 Otros usos: -
 Uso: *${prefix}recordatorio* 10s | asunto del recordatorio. 
 
-8. *${prefix}imagetourl*
+7. *${prefix}imagetourl*
 Crea un URL/Link de una imagen que envíes.
 Otros usos: *imgtourl*
 Uso: Envía una imagen con el comando *${prefix}imagetourl* o responde a una imagen con el comando *${prefix}imagetourl*.
 
-9. *${prefix}traducir*
+8. *${prefix}traducir*
 Traduce un texto. 
 Otros usos: *trad*
 Uso: *${prefix}traducir* texto | código de lenguaje. 
 
-10. *${prefix}coronavirus*
+9. *${prefix}coronavirus*
 Muestra los casos de COVID-19 de un país.
 Otros usos: *covid*
 Uso: *${prefix}coronavirus* País. 
 
-11. *${prefix}imagen*
+10. *${prefix}imagen*
 Busca una imagen! 
 Otros usos: *image*
 Uso: *${prefix}imagen* imagen a buscar. 
 
-12. *${prefix}google*
+11. *${prefix}google*
 Busca algo en google! 
 Otros usos: *googlesearch*
 Uso: ejemplo *${prefix}google* Anime español. 
@@ -517,57 +512,62 @@ Crea stickers con imágenes enviadas o respondidas.
 Otros usos: *stiker*
 Uso: Envia una imagen con el comando *${prefix}sticker* o responde a una imagen con el comando *${prefix}sticker*.
 
-2. *${prefix}stickergif*
+2  *${prefix}circular*
+Crea stickers circulares con imágenes enviadas o respondidas. 
+Otros usos: - 
+Uso: Envia una imagen con el comando *${prefix}circular* o responde a una imagen con el comando *${prefix}circular*.
+
+3. *${prefix}stickergif*
 Crea sticker a partir de videos/GIFs.
 Otros usos: *stikergif*
 Uso: Envia videos/GIFs con el comando *${prefix}stickergif* o responda a los videos/GIFs con el comando *${prefix}stickergif*.
 
-3. *${prefix}stickertoimg*
+4. *${prefix}stickertoimg*
 Convierte un sticker a imagen.
 Otros usos: *stikertoimg*
 Uso: Responda a un sticker con el comando *${prefix}stickertoimg*.
 
-4. *${prefix}ttp*
+5. *${prefix}ttp*
 Texto a sticker. 
 Otros usos: -
 Uso *${prefix}ttp* texto. 
 
-5. *${prefix}renombrar*
+6. *${prefix}renombrar*
 Cambia el nombre de paquete y autor de un Sticker.
 Otros usos: *cstick*
 Uso: Responda a un sticker con el comando *${prefix}rename* y el nuevo texto que desea agregar ej. *${prefix}rename* Orumaito | WaifuBot.
 
-6. *${prefix}wasted*
+7. *${prefix}wasted*
 Crea un efecto de wasted como GTA.
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}wasted* o responde a una imagen con el comando *${prefix}wasted*.
  
- 7. *${prefix}triggered*
+ 8. *${prefix}triggered*
 Crea un gif con la leyenda triggered. 
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}triggered* o responde a una imagen con el comando *${prefix}triggered*.
 
- 8. *${prefix}rojo*
+ 9. *${prefix}rojo*
 Crea una imagen y sticker con un filtro rojo .
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}rojo* o responde a una imagen con el comando *${prefix}rojo*.
 
-9. *${prefix}gay*
+10. *${prefix}gay*
 Crea una imagen y sticker con los colores de la bandera gay. 
 Otros usos: -
 Uso: Envía una imagen con el comando *${prefix}gay* o responde a una imagen con el comando *${prefix}gay*.
 
-10. *${prefix}nobg*
+11. *${prefix}nobg*
 Crea Stickers sin fondo (exclusivo para el propietario). 
 Otros usos: *recorte*
 Uso: Envie una imagen con el comando *${prefix}nobg*
 
-11. *${prefix}emoji*
+12. *${prefix}emoji*
 Crea un sticker de un emoji (solo algunos) 
 Otros usos : - 
 Uso: Responda a un emoji con el comando *${prefix}emoji*
 
-12. *${prefix}colores*
+13. *${prefix}colores*
 Crea un sticker de texto/emoji con colores. 
 Uso: *${prefix}emoji* texto/emoji 
 
