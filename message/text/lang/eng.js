@@ -414,17 +414,12 @@ Verificación de tiempo activo premium.
 Otros usos: *cekpremium*
 Uso: *${prefix}tiempopremium*
 
-13. *${prefix}listapremium*
-Lista de usuarios premium.
-Otros usos: -
-Uso: *${prefix}listapremium*
-
-14. *${prefix}limite*
+13. *${prefix}limite*
 Verifique su límite restante.
 Otros usos: -
 Uso: *${prefix}limite*
 
-15. *${prefix}activo*
+14. *${prefix}activo*
 Verifique el tiempo de actividad del bot. 
 Uso: *${prefix}activo*
 
@@ -745,6 +740,11 @@ Enviaré tu wa.me.
 Otros usos: -
 Uso: *${prefix}wame*
 
+20. *${prefix}grupoinfo*
+Desglosa la información de tu grupo. 
+Otros usos: - 
+Uso: *${prefix}grupoinfo*
+
 _Indice de menu [7]_
     `
 }
@@ -807,7 +807,7 @@ exports.menuOwner = () => {
 -----[ DUEÑO ]-----
 Hola Orumaito-sama ヽ(・∀・)ﾉ!
 
-1. *${prefix}transmision*
+1. *${prefix}bc*
 Haz una transmisión.
 Otros usos: -
 Uso: *${prefix}transmision* texto. 
@@ -878,7 +878,7 @@ Otros usos: -
 Uso: *${prefix}listagrupos*
 
 15. *${prefix}reset*
-Me reiniciare.
+Reiniciare el límite de uso de los usuarios. 
 Otros usos: -
 Uso: *${prefix}reset*
 
