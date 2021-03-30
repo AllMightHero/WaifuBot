@@ -240,7 +240,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
        // Anti virtext by: @VideFrelan
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && !isOwner) {
            if (chats.length > 5000) {
-               await bocchi.sendTextWithMentions(from, `@${sender.id} is detected sending a virtext.\nYou will be kicked!`)
+               await bocchi.sendTextWithMentions(from, `@${sender.id} has enviado exceso de texto.\nTendre que sacarte del grupo!`)
                await bocchi.removeParticipant(groupId, sender.id)
             }
         } 
@@ -524,7 +524,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 const videoResult = res.items.filter(item => item.type === 'video')[0]
 
                 if (!videoResult) {
-                    return bocchi.reply(from, `No puedo encontrar alguna m�sica en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese título`, id)
                 }
 
                 const playInfo = await ytdl.getInfo(videoResult.url, {
@@ -549,7 +549,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
                 //console.log(songinfo);
                 let testPlaySize = (((songPlayInfo.lengthSeconds * 128000) / 8) / 1024) / 1024
-                console.log(`Tama�o de la musica : ${testPlaySize} MB`);
+                console.log(`Tamaño de la musica : ${testPlaySize} MB`);
 
                 if (testPlaySize >= 15) {
                     return bocchi.reply(from, `Lo siento el limite de audio es de 15MB.`, id)
@@ -583,7 +583,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     });
                 break
 case 'video':
-                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video � nombre � o � enlace �`, id)
+                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video nombre o enlace`, id)
                 await bocchi.reply(from, `*Descargando video...*`, id)
                 const resa = await ytsr(body.slice(6)).catch(err => {
                     return bocchi.reply(from, `No puedo encontrar algun video en YouTube con ese t�tulo`, id)
@@ -2225,8 +2225,8 @@ case 'ttp':
                  }
                  bocchi.sendFileFromUrl(from, pfp, 'group.png', `Nombre Del Grupo: ${groupnameee}\n\nFecha De Creación: ${created}\n\nDescripción:\n${desc}\n\nUsuarios:  ${totalMem}\n\nBienvenida:  ${bienvenida}\n\nAuto-Sticker:  ${autosticker}\n\nAnti-Enlace:  ${antilinkgc}`, id)
             break
-            // COMANDOS DEL DUE�O 
-            case 'bc':
+            // COMANDOS DEL DUEÑO 
+            case 'transmision':
             if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
             let msgi = body.slice(9)
             const chatg = await bocchi.getAllGroups()
