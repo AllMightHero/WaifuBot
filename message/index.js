@@ -595,7 +595,7 @@ case 'video':
                 let info = await ytdl.getInfo(viidio);
                 let format = ytdl.chooseFormat(info.formats, { quality: '18' });
                 //console.log('Format found!', format)
-                if (format.contentLength >= 4500000) {
+                if (format.contentLength >= 45000000) {
                         return bocchi.reply(from, `Lo siento el limite de video es de 45MB.`, id)
                     } else {
                 await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','A�os atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
@@ -710,7 +710,7 @@ case 'video':
             break
             case 'aleatorio':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (isGroupMsg) return await bocchi.reply(from, 'Command ini tidak bisa digunakan di dalam grup!', id)
+                if (isGroupMsg) return await bocchi.reply(from, 'Este comando no se puede usar en un grupo!', id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.reply(from, 'Looking for a partner...', id)
@@ -719,12 +719,12 @@ case 'video':
             break
             case 'siguiente':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (isGroupMsg) return await bocchi.reply(from, 'Command ini tidak bisa digunakan di dalam grup!', id)
+                if (isGroupMsg) return await bocchi.reply(from, 'Este comando no se puede usar en un grupo!', id)
                 if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
                 await bocchi.reply(from, 'Looking for a partner...', id)
                 await bocchi.sendContact(from, register.getRegisteredRandomId(_registered))
-                await bocchi.sendText(from, `Partner found: 🙉\n*${prefix}next* — find a new partner`)
+                await bocchi.sendText(from, `Contacto encontrado: 🙉\n*${prefix}next* — para buscar un nuevo compañero`)
             break 
             case 'recordatorio': // by Slavyan
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
@@ -839,28 +839,28 @@ case 'video':
                 const reqXpMenu = 5 * Math.pow(levelMenu, 2) + 50 * 1 + 100
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (args[0] === '1') {
-                    await bocchi.sendText(from, ind.menuDownloader())
+                    await bocchi.sendFile(from, './imagenes/menu1.png', 'menu.png', ind.menuDownloader(), id)
                 } else if (args[0] === '2') {
-                    await bocchi.sendText(from, ind.menuBot())
+                    await bocchi.sendFile(from, './imagenes/menu2.png', 'menu.png', ind.menuBot(), id)
                 } else if (args[0] === '3') {
-                    await bocchi.sendText(from, ind.menuMisc())
+                    await bocchi.sendFile(from, './imagenes/menu3.png', 'menu.png', ind.menuMisc(), id)
                 } else if (args[0] === '4') {
-                    await bocchi.sendText(from, ind.menuSticker())
+                    await bocchi.sendFile(from, './imagenes/menu4.png', 'menu.png', ind.menuSticker(), id)
                 } else if (args[0] === '5') {
-                    await bocchi.sendText(from, ind.menuWeeaboo())
+                    await bocchi.sendFile(from, './imagenes/menu5.png', 'menu.png', ind.menuWeeaboo(), id)
                 } else if (args[0] === '6') {
-                    await bocchi.sendText(from, ind.menuFun())
+                    await bocchi.sendFile(from, './imagenes/menu6.png', 'menu.png', ind.menuFun(), id)
                 } else if (args[0] === '7') {
-                    await bocchi.sendText(from, ind.menuModeration())
+                    await bocchi.sendFile(from, './imagenes/menu7.png', 'menu.png', ind.menuModeration(), id)
                 } else if (args[0] === '8') {
                     if (isGroupMsg && !isNsfw) return await bocchi.reply(from, ind.notNsfw(), id)
-                    await bocchi.sendText(from, ind.menuNsfw())
+                    await bocchi.sendFile(from, './imagenes/menu8.png', 'menu.png', ind.menuNsfw(), id)
                 } else if (args[0] === '9') {
                     if (!isOwner) return await bocchi.reply(from, ind.ownerOnly())
-                    await bocchi.sendText(from, ind.menuOwner())
+                    await bocchi.sendFile(from, './imagenes/menu9.png', 'menu.png', ind.menuOwner(), id)
                 } else if (args[0] === '10') {
                     if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
-                    await bocchi.sendText(from, ind.menuLeveling())
+                    await bocchi.sendFile(from, './imagenes/menu10.png', 'menu.png', ind.menuLeveling(), id)
                 } else {
                     await bocchi.sendFile(from, './menu.png', 'menu.png', ind.menu(jumlahUser, levelMenu, xpMenu, role, pushname, reqXpMenu, isPremium ? 'YES' : 'NO'), id)
                 }
@@ -894,7 +894,7 @@ case 'video':
             case 'ping':
             case 'p':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                await bocchi.sendText(from, `Pong!\nMi rapidez es de: ${processTime(t, moment())} secs`)
+                await bocchi.sendText(from, `Pong!\nMi rapidez es de: ${processTime(t, moment())} segundos`)
             break
             case 'borrar':
             case 'del':
@@ -1203,7 +1203,6 @@ case 'video':
                 }
             break
             case 'circular':
-            case 'stikerc':
                 if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
                 if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
                 if (isMedia && isImage || isQuotedImage) {
@@ -2191,9 +2190,9 @@ case 'ttp':
                     const profilePic = await bocchi.getProfilePicFromServer(sender.id)
                     const username = pushname
                     const statuses = await bocchi.getStatus(sender.id)
-                    const benet = isBanned ? 'Yes' : 'No'
-                    const adm = isGroupAdmins ? 'Yes' : 'No'
-                    const premi = isPremium ? 'Yes' : 'No'
+                    const benet = isBanned ? 'Si' : 'No'
+                    const adm = isGroupAdmins ? 'Si' : 'No'
+                    const premi = isPremium ? 'Si' : 'No'
                     const levelMe = level.getLevelingLevel(sender.id, _level)
                     const xpMe = level.getLevelingXp(sender.id, _level)
                     const req = 5 * Math.pow(levelMe, 2) + 50 * 1 + 100
@@ -2209,16 +2208,33 @@ case 'ttp':
             case 'wame':
 		await bocchi.reply(from, `wa.me/${sender.id.replace(/@c.us/g, '')}`, id)
 	        break
+	case 'grupoinfo':
+                 var totalMem = chat.groupMetadata.participants.length
+                 const timestp = chat.groupMetadata.creation
+                 const created = moment(timestp * 1000).format('DD-MM-YYYY HH:mm:ss')
+                 var groupnameee = name
+                 var desc = chat.groupMetadata.desc
+                 var antilinkgc = isDetectorOn ? 'activado' : 'desactivado'
+                 var autosticker = isAutoStickerOn ? 'activado' : 'desactivado'
+                 var bienvenida = isWelcomeOn ? 'activado' : 'desactivado'
+                 var grouppic = await bocchi.getProfilePicFromServer(chat.id)
+                 if (grouppic == undefined) {
+                    var pfp = errorImg
+                 } else {
+                 var pfp = grouppic 
+                 }
+                 bocchi.sendFileFromUrl(from, pfp, 'group.png', `Nombre Del Grupo: ${groupnameee}\n\nFecha De Creación: ${created}\n\nDescripción:\n${desc}\n\nUsuarios:  ${totalMem}\n\nBienvenida:  ${bienvenida}\n\nAuto-Sticker:  ${autosticker}\n\nAnti-Enlace:  ${antilinkgc}`, id)
+            break
             // COMANDOS DEL DUE�O 
-            case 'transmision':
-                if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
-                if (!q) return await bocchi.reply(from, ind.emptyMess(), id)
-                const chats = await bocchi.getAllChatIds()
-                for (let bcs of chats) {
-                    let cvk = await bocchi.getChatById(bcs)
-                    if (!cvk.isReadOnly) await bocchi.sendText(bcs, `${q}\n\n- (Orumaito)\n_Mensaje general_`)
-                }
-                await bocchi.reply(from, ind.doneOwner(), id)
+            case 'bc':
+            if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+            let msgi = body.slice(9)
+            const chatg = await bocchi.getAllGroups()
+            for (let idg of chatg) {
+                var cpk = await bocchi.getChatById(idg)
+                if (!cpk.isReadOnly) await bocchi.sendText(idg.contact.id, `[ MENSAJE ]\n\n${msgi}`)
+            }
+            bocchi.reply(from, 'Transmision enviada!', id)
             break
             case 'limpiarchats':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
