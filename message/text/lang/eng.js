@@ -807,7 +807,7 @@ exports.menuOwner = () => {
 -----[ DUEÑO ]-----
 Hola Orumaito-sama ヽ(・∀・)ﾉ!
 
-1. *${prefix}transmision*
+1. *${prefix}bcgroup*
 Haz una transmisión.
 Otros usos: -
 Uso: *${prefix}transmision* texto. 
