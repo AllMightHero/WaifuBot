@@ -70,6 +70,8 @@ const cd = 4.32e+7
 const limitCount = 25
 const errorImg = 'https://i.ibb.co/jRCpLfn/user.png'
 const tanggal = moment.tz('Asia/Jakarta').format('DD-MM-YYYY')
+const { warnss } = require('../function')
+const warnCount = 1
 /********** END OF UTILS **********/
 
 /********** DATABASES **********/
@@ -90,6 +92,7 @@ const _daily = JSON.parse(fs.readFileSync('./database/user/daily.json'))
 const _stick = JSON.parse(fs.readFileSync('./database/bot/sticker.json'))
 const _setting = JSON.parse(fs.readFileSync('./database/bot/setting.json'))
 let { memberLimit, groupLimit } = _setting
+const _warn = JSON.parse(fs.readFileSync('./database/group/warn.json'))
 /********** END OF DATABASES **********/
 
 /********** MESSAGE HANDLER **********/
@@ -1169,14 +1172,7 @@ case 'video':
             bocchi.sendPtt(from, './audios/smash.mp3', id)
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *golpea a* ' + arq[1])
             break
-            case 'logo':
-			    if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
-                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
-				if (args.length == 0) bocchi.reply(from, 'Coloca un nombre!', id)
-			await bocchi.reply(from, eng.wait(), id)
-			await bocchi.sendFileFromUrl(from, `https://docs-jojo.herokuapp.com/api/gaming?text=${body.slice(6)}`, '', '', id)
-			break
-            
+                       
             // STICKER 
                     case 'stiker':
             case 'sticker':
@@ -1287,9 +1283,8 @@ case 'video':
 case 'ttp':
 			    if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
                 if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
-				await bocchi.reply(from, eng.wait(), id)
 			if (args.length == 0) return bocchi.reply(from, 'Falta la frase', id)
-			
+			await bocchi.reply(from, eng.wait(), id)
 			axios.get(`https://api.areltiyan.site/sticker_maker?text=${body.slice(5)}`)
 			.then(res => {
 				bocchi.sendImageAsSticker(from, res.data.base64, { author: '@Orumaito' , pack: 'Creado por WaifuBot', keepScale:'true'})
@@ -1465,7 +1460,9 @@ case 'ttp':
             if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
             if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
             const colorstick = body.slice(9)
+            
             try {
+            	await bocchi.reply(from, eng.wait(), id)
                 const ttpc = await axios.get(`https://api.xteam.xyz/attp?text=${encodeURIComponent(colorstick)}`)
                 const attp = ttpc.data.result
                 await bocchi.sendImageAsSticker(from, attp, { author: '@Orumaito', pack: 'Creado por WaifuBot' })
@@ -2225,6 +2222,24 @@ case 'ttp':
                  }
                  bocchi.sendFileFromUrl(from, pfp, 'group.png', `Nombre Del Grupo: ${groupnameee}\n\nFecha De Creación: ${created}\n\nDescripción:\n${desc}\n\nUsuarios:  ${totalMem}\n\nBienvenida:  ${bienvenida}\n\nAuto-Sticker:  ${autosticker}\n\nAnti-Enlace:  ${antilinkgc}`, id)
             break
+            case 'advertencia' :
+        if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
+        if (isGroupMsg && isGroupAdmins || isGroupMsg && isOwner) {
+        if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly2(), id)
+        if (!isBotGroupAdmins) return await bocchi.reply(from, ind.botNotAdmin(), id)
+        if (quotedMsg) {
+            const war = quotedMsgObj.sender.id
+            const warss = warnss.getwarns(war, _warn, warnCount)
+            if (Number(warss) >= 3) {
+                bocchi.sendTextWithMentions(from, `    *⺀ EXPULSIÓN ⺀* ❌‼️\n\nEl usuario *@${war}* ha llego a su ultima advertencia, por lo cual será eliminado del grupo.`) 
+                await bocchi.removeParticipant(groupId, war)
+                warnss.resetwarn(war, _warn)
+            } else {
+            warnss.addwarn(war, _warn)
+            bocchi.sendTextWithMentions(from, `    *⺀ ADVERTENCIA ⺀* ⚠️‼️\n\nEl usuario *@${war}* Ha sido advertido.\n\n*○ ${warss}/3*\n\n*Si tus advertencias llegan a 3 serás expulsado del grupo.*`)
+            }  
+        }}
+    break
             // COMANDOS DEL DUEÑO 
             case 'transmision':
             if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
