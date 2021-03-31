@@ -2241,7 +2241,7 @@ case 'ttp':
         }}
     break
             // COMANDOS DEL DUEÑO 
-            case 'transmision':
+            case 'bcgroup':
             if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
             let msgi = body.slice(9)
             const chatg = await bocchi.getAllGroups()
