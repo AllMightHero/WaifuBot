@@ -632,11 +632,6 @@ Golpea a alguien del grupo.
 Otros usos. - 
 Uso:  *${prefix}golpear* @miembro1
 
-9. *${prefix}logo*
-Otros usos: - 
-Uso: *{prefix}logo* Nombre. 
-
-
 _Indice de menu [6]_
     `
 }
@@ -666,7 +661,7 @@ Otros usos: -
 Uso: *${prefix}demote* @member1
 
 5. *${prefix}vete*
-Hazme salir de tu grupo :(.
+Hazme salir de tu grupo :(
 Otros usos: -
 Uso: *${prefix}vete*
 
@@ -744,6 +739,11 @@ Uso: *${prefix}wame*
 Desglosa la información de tu grupo. 
 Otros usos: - 
 Uso: *${prefix}grupoinfo*
+
+21. *${prefix}advertencia*
+De advertencias a los usuarios, 3 advertencias y serán expulsados. 
+Otros usos: - 
+Uso: *${prefix}advertencia* responda a un mensaje de la persona que desea advertir. 
 
 _Indice de menu [7]_
     `
