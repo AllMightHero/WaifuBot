@@ -1430,9 +1430,8 @@ case 'ttp':
             case 'removebg':
             case 'stickernobg':
             case 'recorte':
-            if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+            if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
             if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
-            if (!isOwner ) return await bocchi.reply(from, eng.notPremium(), id)
                             if (isMedia && type === 'image') {
                                 try {
                                     bocchi.reply(from, 'Espere...', id)
