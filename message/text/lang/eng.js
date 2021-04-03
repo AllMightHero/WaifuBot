@@ -66,6 +66,18 @@ exports.nhFalse = () => {
     return `¡Codigo invalido!`
 }
 
+exports.muteChatOn = () => {
+    return `Entendido, ignorare los comandos de este grupo!`
+}
+
+exports.muteChatOnAlready = () => {
+    return `Ignorar ya ha sido activado con éxito antes!`
+}
+
+exports.muteChatOff = () => {
+    return `Ya se pueden usar los comandos en este grupo!`
+}
+
 exports.listBlock = (blockNumber) => {
     return `------[ SALA DE LA VERGUENZA ]------\n\nTotal bloqueados: *${blockNumber.length}* usuario(s)\n`
 }
@@ -273,6 +285,23 @@ exports.ageOld = () => {
 exports.fakeLink = () => {
     return `Ow, este enlace parece un poco sospechoso, por la seguridad de los miembros de este grupo, te sacare.\nBye~.`
 }
+
+exports.stickerDel = () => {
+    return `¡Sticker eliminado con éxito de la base de datos!`
+}
+
+exports.stickerAdd = () => {
+    return `¡Sticker añadido correctamente a la base de datos!`
+}
+
+exports.stickerAddAlready = (q) => {
+    return `Sticker con palabra clave "${q}" ya existe en la base de datos!`
+}
+
+exports.stickerNotFound = () => {
+    return `¡No se ha encontrado el sticker!`
+}
+
 
 exports.limit = () => {
     return `
@@ -632,6 +661,13 @@ Golpea a alguien del grupo.
 Otros usos. - 
 Uso:  *${prefix}golpear* @miembro1
 
+9. *${prefix}abrazar*
+Abraza a alguien del grupo :3
+Otros usos. - 
+Uso:  *${prefix}abrazar* @miembro1
+
+
+
 _Indice de menu [6]_
     `
 }
@@ -660,87 +696,82 @@ Retira el admin a un miembro de tu grupo.
 Otros usos: -
 Uso: *${prefix}demote* @member1
 
-5. *${prefix}vete*
-Hazme salir de tu grupo :(
-Otros usos: -
-Uso: *${prefix}vete*
-
-6. *${prefix}todos*
+5. *${prefix}todos*
 Mencionare a todos los miembros del grupo.
 Otros usos: -
 Uso: *${prefix}todos*
 
-7. *${prefix}cambiarfoto*
+6. *${prefix}cambiarfoto*
 Cambia la foto del tu grupo.
 Otros usos: -
 Uso: Envía imágenes con em comando *${prefix}cambiarfoto* o responde a imágenes con el comando *${prefix}cambiarfoto*
 
-8. *${prefix}antilink*
+7. *${prefix}antilink*
 Activa la función a ti-links de grupos. 
 Otros usos: -
 Uso: *${prefix}antilink* activar/desactivar
 
-9. *${prefix}bienvenida*
+8. *${prefix}bienvenida*
 Activa la función de bienvenida y adiós. 
 Otros usos: -
 Uso: *${prefix}bienvenida* activar/desactivar
 
-10. *${prefix}autosticker*
+9. *${prefix}autosticker*
 Activa la cuncion de  auto-stickers. Toda imagen que manden será convertida en un sticker.
 Otros usos: *autostiker autostik*
 Uso: *${prefix}autostiker* activar/desactivar
 
-11. *${prefix}antinsfw*
+10. *${prefix}antinsfw*
 Activa la función anti-NSFW links. 
 Otros usos: -
 Uso: *${prefix}antinsfw* activar/desactivar
 
-12. *${prefix}soloadmins*
+11. *${prefix}soloadmins*
 Configure el grupo para que solo administradores puedan enviar mensajes. 
 Otros usos: -
 Uso: *${prefix}soloadmins* activar/desactivar
 
-13. *${prefix}nuevolink*
+12. *${prefix}nuevolink*
 Restablezca el enlace de su grupo.
 Otros usos: -
 Uso: *${prefix}nuevolink*
 
-14. *${prefix}linkgrupo*
+13. *${prefix}linkgrupo*
 Obtenga el enlace de su grupo.
 Otros usos: -
 Uso: *${prefix}linkgrupo*
 
-15. *${prefix}creadorgrupo*
+14. *${prefix}creadorgrupo*
 Mire quien creo el grupo.
 Otros usos: -
 Uso: *${prefix}creadorgrupo*
 
-16. *${prefix}admins*
+15. *${prefix}admins*
 Muestra a los administradores del grupo.
 Otros usos: *admin*
 Uso: *${prefix}admins*
 
-17. *${prefix}niveles*
+16. *${prefix}niveles*
 Active la funcion de niveles
 Otros usos: -
 Uso: *${prefix}niveles* activar /desactivar 
 
-18. *${prefix}perfil*
+17. *${prefix}perfil*
 Muestra su perfil de usuario.
 Otros usos: *yo*
 Uso: *${prefix}perfil*
 
-19. *${prefix}wame*
+18. *${prefix}wame*
 Enviaré tu wa.me.
 Otros usos: -
 Uso: *${prefix}wame*
 
-20. *${prefix}grupoinfo*
+19. *${prefix}grupoinfo*
 Desglosa la información de tu grupo. 
 Otros usos: - 
 Uso: *${prefix}grupoinfo*
 
-21. *${prefix}advertencia*
+20. *${prefix}advertencia*
 De advertencias a los usuarios, 3 advertencias y serán expulsados. 
 Otros usos: - 
 Uso: *${prefix}advertencia* responda a un mensaje de la persona que desea advertir. 
@@ -882,11 +913,21 @@ Reiniciare el límite de uso de los usuarios.
 Otros usos: -
 Uso: *${prefix}reset*
 
-16. *Texto sin prefijo*
-Mandare un audio 7u7
-Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, 
+16. *${prefix}vete*
+Hazme salir del grupo.
+Otros usos: -
+Uso: *${prefix}vete*
 
-17. *Musica Random*
+17. *${prefix}ignorar*
+Ignorare los comandos en el grupo. 
+Otros usos: - 
+Uso: *${prefix}ignorar* si/no. 
+
+18. *Texto sin prefijo*
+Mandare un audio 7u7
+Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, Yamete
+
+19. *Musica Random*
 Las favoritas de Orumaito
 Uso: Hentai, 
 
