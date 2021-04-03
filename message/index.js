@@ -83,6 +83,7 @@ const _welcome = JSON.parse(fs.readFileSync('./database/group/welcome.json'))
 const _autosticker = JSON.parse(fs.readFileSync('./database/group/autosticker.json'))
 const _ban = JSON.parse(fs.readFileSync('./database/bot/banned.json'))
 const _premium = JSON.parse(fs.readFileSync('./database/bot/premium.json'))
+const _mute = JSON.parse(fs.readFileSync('./database/bot/mute.json'))
 const _registered = JSON.parse(fs.readFileSync('./database/bot/registered.json'))
 const _level = JSON.parse(fs.readFileSync('./database/user/level.json'))
 let _limit = JSON.parse(fs.readFileSync('./database/user/limit.json'))
@@ -136,6 +137,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         const isLevelingOn = isGroupMsg ? _leveling.includes(groupId) : false
         const isAutoStickerOn = isGroupMsg ? _autosticker.includes(groupId) : false
         const isAntiNsfw = isGroupMsg ? _antinsfw.includes(groupId) : false
+        const isMute = isGroupMsg ? _mute.includes(chat.id) : false
         const isAfkOn = afk.checkAfkUser(sender.id, _afk)
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
         const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
@@ -162,51 +164,50 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
             timezone: 'Asia/Jakarta'
         })
        
-        // ROLE (Change to what you want, or add) and you can change the role sort based on XP.
+// ROLE (Change to what you want, or add) and you can change the role sort based on XP.
         const levelRole = level.getLevelingLevel(sender.id, _level)
-        var role = 'COBRE  V'
-        if (levelRole >= 5) {
-            role = 'COBRE  IV'
-        } else if (levelRole >= 10) {
-            role = 'COBRE  III'
-        } else if (levelRole >= 15) {
-            role = 'COBRE  II'
-        } else if (levelRole >= 20) {
-            role = 'COBRE  I'
-        } else if (levelRole >= 25) {
-            role = 'PLATA  V'
-        } else if (levelRole >= 30) {
-            role = 'PLATA  IV'
-        } else if (levelRole >= 35) {
-            role = 'PLATA  III'
-        } else if (levelRole >= 40) {
-            role = 'PLATA  II'
-        } else if (levelRole >= 45) {
-            role = 'PLATA  I'
-        } else if (levelRole >= 50) {
-            role = 'ORO V'
-        } else if (levelRole >= 55) {
-            role = 'ORO IV'
-        } else if (levelRole >= 60) {
-            role = 'ORO III'
-        } else if (levelRole >= 65) {
-            role = 'ORO II'
-        } else if (levelRole >= 70) {
-            role = 'ORO I'
-        } else if (levelRole >= 75) {
-            role = 'PLATINO V'
-        } else if (levelRole >= 80) {
-            role = 'PLATINO IV'
-        } else if (levelRole >= 85) {
-            role = 'PLATINO III'
-        } else if (levelRole >= 90) {
-            role = 'PLATINO II'
-        } else if (levelRole >= 95) {
-            role = 'PLATINO I'
-        } else if (levelRole >= 100) {
-            role = 'EXTERMINADOR'
+        var role = 'Cobre V'
+        if (levelRole <=5 ) {
+            role = 'Cobre IV'
+        } else if (levelRole <= 10) {
+            role = 'Cobre III'
+        } else if (levelRole <= 15) {
+            role = 'Cobre II'
+        } else if (levelRole <= 20) {
+            role = 'Cobre I'
+        } else if (levelRole <= 25) {
+            role = 'Plata V'
+        } else if (levelRole <= 30) {
+            role = 'Plata IV'
+        } else if (levelRole <= 35) {
+            role = 'Plata III'
+        } else if (levelRole <= 40) {
+            role = 'Plata II'
+        } else if (levelRole <= 45) {
+            role = 'Plata I'
+        } else if (levelRole <= 50) {
+            role = 'Oro V'
+        } else if (levelRole <= 55) {
+            role = 'Oro IV'
+        } else if (levelRole <= 60) {
+            role = 'Oro III'
+        } else if (levelRole <= 65) {
+            role = 'Oro II'
+        } else if (levelRole <= 70) {
+            role = 'Oro I'
+        } else if (levelRole <= 75) {
+            role = 'Platino  V'
+        } else if (levelRole <= 80) {
+            role = 'Platino  IV'
+        } else if (levelRole <= 85) {
+            role = 'Platino  III'
+        } else if (levelRole <= 90) {
+            role = 'Platino  II'
+        } else if (levelRole <= 95) {
+            role = 'Platino  I'
+        } else if (levelRole <= 100) {
+            role = 'Exterminador' 
         }
-
         // Leveling [BETA] by Slavyan
         if (isGroupMsg && isRegistered && !level.isGained(sender.id) && !isBanned && isLevelingOn) {
             try {
@@ -368,7 +369,10 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 bocchi.sendPtt(from, './audios/sawarasenai.mp3', id)
         }
        
-       
+         
+        // Mute
+        if (isCmd && isMute && !isOwner) return
+
         // Ignore banned and blocked users
         if (isCmd && (isBanned || isBlocked) && !isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
         if (isCmd && (isBanned || isBlocked) && isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
@@ -460,47 +464,47 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                 let leaderboard = '-----[ *TABLA DE CLASIFICACION* ]----\n\n'
                 try {
                     for (let i = 0; i < 10; i++) {
-                        var roles = 'COBRE  V'
-                        if (resp[i].level >= 5) {
-                            roles = 'COBRE  IV'
-                        } else if (resp[i].level >= 10) {
-                            roles = 'COBRE  III'
-                        } else if (resp[i].level >= 15) {
-                            roles = 'COBRE  II'
-                        } else if (resp[i].level >= 20) {
-                            roles = 'COBRE  I'
-                        } else if (resp[i].level >= 25) {
-                            roles = 'PLATA  V'
-                        } else if (resp[i].level >= 30) {
-                            roles = 'PLATA  IV'
-                        } else if (resp[i].level >= 35) {
-                            roles = 'PLATA  III'
-                        } else if (resp[i].level >= 40) {
-                            roles = 'PLATA  II'
-                        } else if (resp[i].level >= 45) {
-                            roles = 'PLATA  I'
-                        } else if (resp[i].level >= 50) {
-                            roles = 'ORO V'
-                        } else if (resp[i].level >= 55) {
-                            roles = 'ORO IV'
-                        } else if (resp[i].level >= 60) {
-                            roles = 'ORO III'
-                        } else if (resp[i].level >= 65) {
-                            roles = 'ORO II'
-                        } else if (resp[i].level >= 70) {
-                            roles = 'ORO I'
-                        } else if (resp[i].level >= 75) {
-                            roles = 'PLATINO V'
-                        } else if (resp[i].level >= 80) {
-                            roles = 'PLATINO IV'
-                        } else if (resp[i].level >= 85) {
-                            roles = 'PLATINO III'
-                        } else if (resp[i].level >= 90) {
-                            roles = 'PLATINO II'
-                        } else if (resp[i].level >= 95) {
-                            roles = 'PLATINO I'
-                        } else if (resp[i].level >= 100) {
-                            roles = 'EXTERMINADOR'
+                        var roles = 'Cobre  V'
+                        if (resp[i].level <= 5) {
+                            roles = 'Cobre  IV'
+                        } else if (resp[i].level <= 10) {
+                            roles = 'Cobre  III'
+                        } else if (resp[i].level <= 15) {
+                            roles = 'Cobre  II'
+                        } else if (resp[i].level <= 20) {
+                            roles = 'Cobre  I'
+                        } else if (resp[i].level <= 25) {
+                            roles = 'Plata  V'
+                        } else if (resp[i].level <= 30) {
+                            roles = 'Plata  IV'
+                        } else if (resp[i].level <= 35) {
+                            roles = 'Plata  III'
+                        } else if (resp[i].level <= 40) {
+                            roles = 'Plata  II'
+                        } else if (resp[i].level <= 45) {
+                            roles = 'Plata  I'
+                        } else if (resp[i].level <= 50) {
+                            roles = 'Oro V'
+                        } else if (resp[i].level <= 55) {
+                            roles = 'Oro IV'
+                        } else if (resp[i].level <= 60) {
+                            roles = 'Oro III'
+                        } else if (resp[i].level <= 65) {
+                            roles = 'Oro II'
+                        } else if (resp[i].level <= 70) {
+                            roles = 'Oro I'
+                        } else if (resp[i].level <= 75) {
+                            roles = 'Platino V'
+                        } else if (resp[i].level <= 80) {
+                            roles = 'Platino IV'
+                        } else if (resp[i].level <= 85) {
+                            roles = 'Platino III'
+                        } else if (resp[i].level <= 90) {
+                            roles = 'Platino II'
+                        } else if (resp[i].level <= 95) {
+                            roles = 'Platino I'
+                        } else if (resp[i].level <= 100) {
+                            roles = 'Exterminador'
                         }
                         leaderboard += `${i + 1}. wa.me/${_level[i].id.replace('@c.us', '')}\n➸ *XP*: ${_level[i].xp} *Nivel*: ${_level[i].level}\n➸ *Rol*: ${roles}\n\n`
                     }
@@ -513,7 +517,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
             // DESCARGAS
                        case 'musica':
-                if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica � nombre � o � enlace �`, id)
+                if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica nombre o enlace`, id)
                 await bocchi.reply(from, `*Descargando musica...*`, id)
                 const playOptions = {
                     limit: 1,
@@ -521,7 +525,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     hl: 'pt'
                 }
                 const res = await ytsr(body.slice(6), playOptions).catch(err => {
-                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar alguna musica en YouTube con ese título`, id)
                 })
 
                 const videoResult = res.items.filter(item => item.type === 'video')[0]
@@ -1172,6 +1176,13 @@ case 'video':
             bocchi.sendPtt(from, './audios/smash.mp3', id)
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *golpea a* ' + arq[1])
             break
+            case 'abrazo':
+            if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+            arq = body.trim().split(' ')
+            const person8 = pushname.replace('@c.us', '')
+            await bocchi.sendStickerfromUrl(from, 'https://raw.githubusercontent.com/AllMightHero/Acciones/main/abrazo.gif')
+            bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *le da un abrazo a* ' + arq[1])
+            break
                        
             // STICKER 
                     case 'stiker':
@@ -1424,16 +1435,14 @@ case 'ttp':
             if (!isOwner ) return await bocchi.reply(from, eng.notPremium(), id)
                             if (isMedia && type === 'image') {
                                 try {
-                                    bocchi.reply(from, '?? Espere...', id)
+                                    bocchi.reply(from, 'Espere...', id)
                                     var mediaData = await decryptMedia(message, uaOverride)
                                     var imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
                                     var base64img = imageBase64
                                     var outFile = './media/img/noBg.png' //
                                     var result = await removeBackgroundFromImageBase64({ base64img, apiKey: '52kbBgHxRt5USDQzAh8xKLeF ', size: 'auto', type: 'auto', outFile })
-                                    await fs.writeFile(outFile, result.base64img)
-                                    
-                                    await bocchi.sendImageAsSticker(from, `data:${mimetype};base64, ${result.base64img}, author: '@Orumaito ', pack: 'Creado por WaifuBot', keepScale:'true' `)
-                                    
+                                    await fs.writeFile(outFile, result.base64img)   
+                                    await bocchi.sendImageAsSticker(from, result.base64img, {keepScale: true, author: '@Orumaito', pack: 'Creado por WaifuBot'})
                                 } catch (err) {
                                     console.log(err)
                                     bocchi.reply(from, 'Ocurrio una falla al procesar la imagen!', id)
@@ -1470,6 +1479,47 @@ case 'ttp':
                 console.error(err)
                 await bocchi.reply(from, 'Error!', id)
             }
+            break
+            case 'addsticker': // by @hardianto02_
+            case 'addstiker':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id) 
+                if (isQuotedSticker) {
+                    if (_stick.includes(q)) {
+                        await bocchi.reply(from, ind.stickerAddAlready(q), id)
+                    } else { 
+                        _stick.push(q)
+                        fs.writeFileSync('./database/bot/sticker.json', JSON.stringify(_stick))
+                        const mediaData = await decryptMedia(quotedMsg, uaOverride)
+                        fs.writeFileSync(`./temp/sticker/${q}.webp`, mediaData)
+                        await bocchi.reply(from, ind.stickerAdd(), id)
+                    }
+                } else {
+                    await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
+            case 'delsticker':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
+                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
+                if (_stick.includes(q)) {
+                    _stick.splice(q, 1)
+                    fs.writeFileSync('./database/bot/sticker.json', JSON.stringify(_stick))
+                    fs.unlinkSync(`./temp/sticker/${q}.webp`)
+                    await bocchi.reply(from, ind.stickerDel(), id)
+                } else {
+                    await bocchi.reply(from, ind.stickerNotFound())
+                }
+            break
+            case 'stickerlist':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
+                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
+                let stickerList = `*── 「 STICKER DATABASE 」 ──*\nTotal: ${_stick.length}\n\n`
+                for (let i of _stick) {
+                    stickerList += `➸ ${i.replace(_stick)}\n`
+                }
+                await bocchi.sendText(from, stickerList)
             break
 
             // NSFW
@@ -1922,13 +1972,6 @@ case 'ttp':
                 await bocchi.demoteParticipant(groupId, mentionedJidList[0])
                 await bocchi.reply(from, ind.ok(), id)
             break
-            case 'vete':
-                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
-                if (!isGroupAdmins) return await bocchi.reply(from, ind.adminOnly(), id)
-                await bocchi.sendText(from, 'Sayonara...u.u~ 👋')
-                await bocchi.leaveGroup(groupId)
-            break
             case 'todos':
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (!isGroupMsg) return await bocchi.reply(from, ind.groupOnly(), id)
@@ -2380,6 +2423,21 @@ case 'ttp':
                 exif.create(namaPack, authorPack)
                 await bocchi.reply(from, ind.doneOwner(), id)
             break
+            case 'ignorar':
+               if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+                          if (ar[0] === 'si') {
+                    if (isMute) return await bocchi.reply(from, ind.muteChatOnAlready(), id)
+                    _mute.push(groupId)
+                    fs.writeFileSync('./database/bot/mute.json', JSON.stringify(_mute))
+                    await bocchi.reply(from, ind.muteChatOn(), id)
+                } else if (ar[0] === 'no') {
+                    _mute.splice(groupId, 1)
+                    fs.writeFileSync('./database/bot/mute.json', JSON.stringify(_mute))
+                    await bocchi.reply(from, ind.muteChatOff(), id)
+                } else {
+                    await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
             case 'nuevonombre':
                 if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 if (!q || q.length > 25) return await bocchi.reply(from, ind.wrongFormat(), id)
@@ -2417,6 +2475,11 @@ case 'ttp':
                 fs.writeFileSync('./database/user/limit.json', JSON.stringify(_limit))
                 await bocchi.reply(from, ind.doneOwner(), id)
                 console.log('Success!')
+            break
+            case 'vete':
+                if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+                await bocchi.sendText(from, 'Sayonara...u.u~ 👋')
+                await bocchi.leaveGroup(groupId)
             break
             
             default:
