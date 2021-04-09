@@ -666,7 +666,15 @@ Abraza a alguien del grupo :3
 Otros usos. - 
 Uso:  *${prefix}abrazar* @miembro1
 
+10. *${prefix}bass*
+Bostea un audio máximo hasta 80
+Otros usos: *booster*
+Uso: *${prefix}bass* (cantidad de bass) ejemplo: *${prefix}bass* 10, El limite del booster es de 80. 
 
+11. *${prefix}nightcore*
+Crea un audio estilo "nightcore" 
+Otros usos: - 
+Uso: *${prefix}nightcore* respondiendo a un audio. 
 
 _Indice de menu [6]_
     `
