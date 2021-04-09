@@ -133,6 +133,7 @@ Nos dará una devolución de llamada como `SUCCESS: se guardó el valor especifi
 > apt-get install ffmpeg
 > npm i ytdl-core 
 > npm i ytsr
+> npm i fb-video-downloader
 ```
 
 ## 🆗 Ejecute el bot
