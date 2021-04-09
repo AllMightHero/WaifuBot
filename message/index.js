@@ -371,8 +371,10 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
        
          
         // Mute
-        if (isCmd && isMute && !isOwner) return
-
+        if (isCmd && isMute && !isOwner){ 
+           return bocchi.reply(from, '*No estoy disponible no me jodas*', id) 
+         }
+         
         // Ignore banned and blocked users
         if (isCmd && (isBanned || isBlocked) && !isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
         if (isCmd && (isBanned || isBlocked) && isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
@@ -517,6 +519,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
 
             // DESCARGAS
                        case 'musica':
+                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (args.length == 0) return bocchi.reply(from, `Para descargar una musica solo usa el comando: ${prefix}musica nombre o enlace`, id)
                 await bocchi.reply(from, `*Descargando musica...*`, id)
                 const playOptions = {
@@ -590,6 +593,7 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     });
                 break
 case 'video':
+               if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
                 if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video nombre o enlace`, id)
                 await bocchi.reply(from, `*Descargando video...*`, id)
                 const resa = await ytsr(body.slice(6)).catch(err => {
@@ -602,31 +606,20 @@ case 'video':
                 let info = await ytdl.getInfo(viidio);
                 let format = ytdl.chooseFormat(info.formats, { quality: '18' });
                 //console.log('Format found!', format)
-                if (format.contentLength >= 45000000) {
-                        return bocchi.reply(from, `Lo siento el limite de video es de 45MB.`, id)
+                if (format.contentLength >= 55000000) {
+                        return bocchi.reply(from, `Lo siento el limite de video es de 55MB.`, id)
                     } else {
                 await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','A�os atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
                     }
                 console.log('Video Enviado Exitosamente.')
                 break
-                case 'facebook':
                 case 'fb':
-                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
-                if (!isUrl(url) && !url.includes('facebook.com')) return await bocchi.reply(from, eng.wrongFormat(), id)
-                await bocchi.reply(from, eng.wait(), id)
-                downloader.fb(url)
-                    .then(async (res) => {
-                        if (res.status === 'error') {
-                            await bocchi.reply(from, res.pesan, id)
-                        } else {
-                            await bocchi.sendFileFromUrl(from, res.result.url, 'video.mp4', '*FACEBOOK Video*', id)
-                            console.log('Success sending Facebook video!')
-                        }
-                    })
-                    .catch(async (err) => {
-                        console.error(err)
-                        await bocchi.reply(from, 'Error!', id)
-                    })
+			case 'facebook':
+                    await bocchi.reply(from, ind.wait(), id)
+require('fb-video-downloader').getInfo(q).then(info => {
+console.log(JSON.stringify(info, null, 2))
+bocchi.sendFileFromUrl(from, info.download.sd, 'fb.mp4', '  *⺀ FACEBOOK MP4 ⺀* \n\n*○ Título:*  ' + `${info.title}` +'',id)
+})
             break
             case 'moddroid': // Chikaa Chantekkzz
                 if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
@@ -1183,7 +1176,80 @@ case 'video':
             await bocchi.sendStickerfromUrl(from, 'https://raw.githubusercontent.com/AllMightHero/Acciones/main/abrazo.gif')
             bocchi.sendTextWithMentions(from, `@${sender.id.replace('@c.us', '')}`+' *le da un abrazo a* ' + arq[1])
             break
-                       
+            case 'bass':
+            case 'booster':
+                 if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+            if (args.length == 0) return bocchi.reply(from, `Boostea una música que te guste mencionandola con el comando: $*{prefix}bass* (cantidad de bass)\n\nejemplo: *${prefix}bass* 10\n\n*El limite del booster es de 80.*`, id)
+                if (isMedia && isAudio || isQuotedAudio || isVoice || isQuotedVoice) {
+                    if (args.length !== 1) return await bocchi.reply(from, ind.wrongFormat(), id)
+                    await bocchi.reply(from, ind.wait(), id)
+                    const encryptMedia = isQuotedAudio || isQuotedVoice ? quotedMsg : message
+                    console.log(color('[WAPI]', 'green'), 'Descargando Y Descifrando De Medios...')
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const temp = './temp'
+                    const name = new Date() * 1
+                    const fileInputPath = path.join(temp, `${name}.mp3`)
+                    const fileOutputPath = path.join(temp, 'audio', `${name}.mp3`)
+                    fs.writeFile(fileInputPath, mediaData, (err) => {
+                        if (err) return console.error(err)
+                        ffmpeg(fileInputPath)
+                            .audioFilter(`equalizer=f=40:width_type=h:width=50:g=${args[0]}`)
+                            .format('mp3')
+                            .on('start', (commandLine) => console.log(color('[FFmpeg]', 'green'), commandLine))
+                            .on('progress', (progress) => console.log(color('[FFmpeg]', 'green'), progress))
+                            .on('end', async () => {
+                                console.log(color('[FFmpeg]', 'green'), 'Proceso Finalizado!')
+                                await bocchi.sendPtt(from, fileOutputPath, id)
+                                await bocchi.sendText(from, eng.ok())
+                                console.log(color('[WAPI]', 'green'), 'Audio Boosteado Enviado Exitosamente!')
+                                setTimeout(() => {
+                                    fs.unlinkSync(fileInputPath)
+                                    fs.unlinkSync(fileOutputPath)
+                                }, 30000)
+                            })
+                            .save(fileOutputPath)
+                    })
+                } else {
+                    await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
+                       case 'nightcore':
+                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+                if (isMedia && isAudio || isQuotedAudio || isVoice || isQuotedVoice) {
+                    await bocchi.reply(from, ind.wait(), id)
+                    const encryptMedia = isQuotedAudio || isQuotedVoice ? quotedMsg : message
+                    console.log(color('[WAPI]', 'green'), 'Downloading and decrypting media...')
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const temp = './temp'
+                    const name = new Date() * 1
+                    const fileInputPath = path.join(temp, `${name}.mp3`)
+                    const fileOutputPath = path.join(temp, 'audio', `${name}.mp3`)
+                    fs.writeFile(fileInputPath, mediaData, (err) => {
+                        if (err) return console.error(err)
+                        ffmpeg(fileInputPath)
+                            .audioFilter('asetrate=44100*1.25')
+                            .format('mp3')
+                            .on('start', (commandLine) => console.log(color('[FFmpeg]', 'green'), commandLine))
+                            .on('progress', (progress) => console.log(color('[FFmpeg]', 'green'), progress))
+                            .on('end', async () => {
+                                console.log(color('[FFmpeg]', 'green'), 'Processing finished!')
+                                await bocchi.sendPtt(from, fileOutputPath, id)
+                                 await bocchi.sendText(from, eng.ok())
+                                console.log(color('[WAPI]', 'green'), 'Success sending audio!')
+                                setTimeout(() => {
+                                    fs.unlinkSync(fileInputPath)
+                                    fs.unlinkSync(fileOutputPath)
+                                }, 30000)
+                            })
+                            .save(fileOutputPath)
+                    })
+                } else {
+                     await bocchi.reply(from, ind.wrongFormat(), id)
+                }
+            break
+            
             // STICKER 
                     case 'stiker':
             case 'sticker':
