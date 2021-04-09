@@ -98,7 +98,7 @@ const start = (bocchi = new Client()) => {
                     .setColor('discriminator-box', '#00100C')
                     .setColor('message-box', '#00100C')
                     .setColor('title', '#00FFFF')
-                    .setBackground('https://www.photohdx.com/images/2016/05/red-blurry-background.jpg')
+                    .setBackground('https://www.photohdx.com/images/2019/07/dark-red-grungy-horror-background.jpg')
                     .toAttachment()
                 const base64 = `data:image/png;base64,${welcomer.toBuffer().toString('base64')}`
                 await bocchi.sendFile(event.chat, base64, 'welcome.png', `Bienvenido! ${pushname}! •Soy Waifubot, un bot de respuestas automaticas el cual te ayudara con diferentes opciones\n\n• Disfruta tu estancia en el grupo\n\n• No olvides registrate en mi sistema para usar mis comandos usando:\n\n• *-registrar* nombre  edad\n\n• Ejemplo: *-registrar* Alex  20\n\n• Si tienes dudas pregunta a los administradores del grupo\n\n• *NO me mandes privado*`)
@@ -120,7 +120,7 @@ const start = (bocchi = new Client()) => {
                     .setColor('discriminator-box', '#00100C')
                     .setColor('message-box', '#00100C')
                     .setColor('title', '#00FFFF')
-                    .setBackground('https://www.photohdx.com/images/2016/05/red-blurry-background.jpg')
+                    .setBackground('https://www.photohdx.com/images/2019/07/dark-red-grungy-horror-background.jpg')
                     .toAttachment()
                 const base64 = `data:image/png;base64,${bye.toBuffer().toString('base64')}`
                 await bocchi.sendFile(event.chat, base64, 'welcome.png', `Adios ${pushname}, igual ni haces falta aqui~`)
