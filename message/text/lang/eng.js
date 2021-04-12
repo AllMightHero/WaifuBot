@@ -933,7 +933,7 @@ Uso: *${prefix}ignorar* si/no.
 
 18. *Texto sin prefijo*
 Mandare un audio 7u7
-Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, Yamete
+Uso: Baka , Senpai , Onichan , Buenos dias, Test, Sawarasenai, Yamete, No chupala
 
 19. *Musica Random*
 Las favoritas de Orumaito
