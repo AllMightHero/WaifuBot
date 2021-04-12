@@ -368,6 +368,11 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
         if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
                 bocchi.sendPtt(from, './audios/sawarasenai.mp3', id)
         }
+               // Fix By Orumaito 
+        if (chats == 'No chupala') {
+        if (!isOwner) return await bocchi.reply(from, ind.ownerOnly(), id)
+                bocchi.sendPtt(from, './audios/no chupala.mp3', id)
+        }
        
          
         // Mute
@@ -593,11 +598,14 @@ module.exports = msgHandler = async (bocchi = new Client(), message) => {
                     });
                 break
 case 'video':
-               if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video nombre o enlace`, id)
-                await bocchi.reply(from, `*Descargando video...*`, id)
+                case 'mp4':
+                if (!isRegistered) return await bocchi.reply(from, eng.notRegistered(), id)
+                if (!isGroupMsg) return bocchi.reply(from, 'Comando solo para grupos!', id)
+			    
+                if (args.length == 0) return bocchi.reply(from, `Para descargar un video solo usa el comando: ${prefix}video « nombre » o « enlace »`, id)
+                await bocchi.reply(from, `*ᴅᴇsᴄᴀʀɢᴀɴᴅᴏ ᴠɪᴅᴇᴏ*  ♬`, id)
                 const resa = await ytsr(body.slice(6)).catch(err => {
-                    return bocchi.reply(from, `No puedo encontrar algun video en YouTube con ese t�tulo`, id)
+                    return bocchi.reply(from, `No puedo encontrar algún video en YouTube con ese título 😔`, id)
                 })
                 const videoDatas = resa.items.filter(item => item.type === 'video')[0];
                 //console.log(videoDatas)
@@ -606,10 +614,10 @@ case 'video':
                 let info = await ytdl.getInfo(viidio);
                 let format = ytdl.chooseFormat(info.formats, { quality: '18' });
                 //console.log('Format found!', format)
-                if (format.contentLength >= 55000000) {
-                        return bocchi.reply(from, `Lo siento el limite de video es de 55MB.`, id)
+                if (format.contentLength >= 500000000) {
+                        return bocchi.reply(from, `Lo siento el limite de video es de 50MB. ✋😥`, id)
                     } else {
-                await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '*YOUTUBE MP4* \n\n*Titulo:*  '+ `${videoDatas.title}` +'\n\n*Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','A�os atras')}` +'\n\n*Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*Listo...*')
+                await bocchi.sendFileFromUrl(from, format.url, `${videoDatas.title}.mp4`, '    *⺀ YOUTUBE MP4 ⺀* \n\n*○ Título:*  '+ `${videoDatas.title}` +'\n\n*○ Subido Por:*  ' + `${videoDatas.author.name}` + '\n\n*○ Formato Del Archivo:*  MPEG-4 parte 14' + '\n\n*○ Publicado:*  ' + `${videoDatas.uploadedAt.replace('years ago','Años atrás')}` +'\n\n*○ Enlace Directo:*  ' + `${videoDatas.url}` + '\n\n*▌│█║▌║▌║║▌│*')
                     }
                 console.log('Video Enviado Exitosamente.')
                 break
@@ -1505,7 +1513,7 @@ case 'ttp':
                                     var imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
                                     var base64img = imageBase64
                                     var outFile = './media/img/noBg.png' //
-                                    var result = await removeBackgroundFromImageBase64({ base64img, apiKey: '52kbBgHxRt5USDQzAh8xKLeF ', size: 'auto', type: 'auto', outFile })
+                                    var result = await removeBackgroundFromImageBase64({ base64img, apiKey: 'oyXwkMtw5PudBBkTojmbwqgn', size: 'auto', type: 'auto', outFile })
                                     await fs.writeFile(outFile, result.base64img)   
                                     await bocchi.sendImageAsSticker(from, result.base64img, {keepScale: true, author: '@Orumaito', pack: 'Creado por WaifuBot'})
                                 } catch (err) {
